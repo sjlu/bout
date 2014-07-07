@@ -1,7 +1,16 @@
 doctype html
 html
   head
-    title= title
+    meta(http-equiv='Content-Type', context='text/html; charset=utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='description', content='')
+
+    title
+      | Unity
+
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
-    block content
+    block body
+    script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
+    block scripts
