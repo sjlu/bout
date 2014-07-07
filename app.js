@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('./lib/mongoose');
 var flash = require('express-flash');
 var session = require('express-session');
-var config = reqiure('./lib/config');
+var config = require('./lib/config');
+var lessMiddleware = require('less-middleware');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,9 +26,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({
   secret: config.SESSION_SECRET
-});
+}));
 app.use(flash());
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
+app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
