@@ -23,6 +23,7 @@
     "lodash": "^2.4.1",
     "mongoose": "^3.8.12",
     "morgan": "~1.0.0",
+    "oauth": "^0.9.12",
     "static-favicon": "~1.0.0",
     "url": "^0.10.1",
     "validator": "^3.16.0"
