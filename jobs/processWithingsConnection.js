@@ -13,7 +13,6 @@ module.exports = function(job, done) {
     _id: uid
   }, function(err, user) {
     if (err) return done(err);
-
     async.parallel([
       function(cb) {
         withings.subscribe(user, cb);
