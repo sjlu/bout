@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
         req.flash('error', 'Unknown username and password combination.');
         return res.redirect('/login');
       }
-      req.session.user = user.id;
+      req.session.user = user._id;
       return res.redirect('/');
     });
   });

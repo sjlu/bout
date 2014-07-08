@@ -19,6 +19,22 @@ var User = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  withings: {
+    nested: {
+      id: {
+        type: Number,
+        required: true
+      },
+      token: {
+        type: String,
+        required: true
+      },
+      secret: {
+        type: String,
+        required: true
+      }
+    }
   }
 });
 

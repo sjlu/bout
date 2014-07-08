@@ -24,7 +24,10 @@ app.use(cookieParser());
 app.use(session({
   secret: config.SESSION_SECRET,
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  cookie: {
+    secure: true
+  }
 }));
 app.use(flash());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
