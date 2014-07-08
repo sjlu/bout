@@ -4,14 +4,14 @@ block body
   div.container
     div.row
       div.col-md-offset-4.col-md-4.box
-        form(method="POST")
-          div
+        form.auth(method="POST")
+          div.auth-input.auth-separator
             input.form-control(type="email", name="email", placeholder="Email")
-          div
+          div.auth-input.auth-separator
             input.form-control(type="text", name="username", placeholder="Username")
-          div
+          div.auth-input.auth-separator
             input.form-control(type="password", name="password", placeholder="Password")
-          div
+          div.auth-input
             input.form-control(type="password", name="confirm_password", placeholder="Confirm Password")
           div
             div
