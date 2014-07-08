@@ -20,21 +20,14 @@ var User = new mongoose.Schema({
     type: String,
     required: true
   },
-  withings: {
-    nested: {
-      id: {
-        type: Number,
-        required: true
-      },
-      token: {
-        type: String,
-        required: true
-      },
-      secret: {
-        type: String,
-        required: true
-      }
-    }
+  withings_id: {
+    type: Number
+  },
+  withings_token: {
+    type: String
+  },
+  withings_secret: {
+    type: String
   }
 });
 

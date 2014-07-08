@@ -9,6 +9,8 @@ var flash = require('express-flash');
 var session = require('express-session');
 var config = require('./lib/config');
 var lessMiddleware = require('less-middleware');
+var RedisStore = require('connect-redis')(session);
+var redis = require('./lib/redis');
 
 var app = express();
 
@@ -23,11 +25,11 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({
   secret: config.SESSION_SECRET,
+  store: new RedisStore({
+    client: redis
+  }),
   saveUninitialized: true,
-  resave: true,
-  cookie: {
-    secure: true
-  }
+  resave: true
 }));
 app.use(flash());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
