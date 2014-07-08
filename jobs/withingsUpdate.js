@@ -1,5 +1,7 @@
 var models = require('../models');
 var withings = require('../lib/withings');
+var moment = require('moment');
+var async = require('async');
 
 module.exports = function(job, done) {
   var withings_id = job.data.withings_id;
@@ -16,10 +18,9 @@ module.exports = function(job, done) {
       var momentPointer = moment(start_date);
       var datesToCheck = [];
       while (!momentPointer.isAfter(end_date)) {
-        daysToCheck.push(momentPointer.format('YYYY-MM-DD'));
+        datesToCheck.push(momentPointer.format('YYYY-MM-DD'));
         momentPointer.add(1, 'day');
       }
-
       async.each(datesToCheck, function(date, cb) {
         withings.getSteps(user, date, function(err, data) {
           if (err) return cb(err);
@@ -31,6 +32,6 @@ module.exports = function(job, done) {
         });
       });
     }
-  ]);
+  ], done);
 
 }
