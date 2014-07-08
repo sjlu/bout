@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var withings = require('../lib/withings');
 var middlewares = require('../middlewares');
+var jawbone = require('../lib/jawbone');
 
 router.use(middlewares.session);
 router.use(middlewares.user);
@@ -31,6 +32,27 @@ router.get('/withings/callback', function(req, res, next) {
       if (err) return next(err);
       res.redirect('/connect');
     })
+  });
+});
+
+router.get('/jawbone', function(req, res, next) {
+  jawbone.getRequestAccessUrl(function(err, url) {
+    if (err) return next(err);
+    res.redirect(url);
+  });
+});
+
+router.get('/jawbone/callback', function(req, res, next) {
+  var code = req.query.code;
+  jawbone.getRequestToken(code, function(err, token) {
+    if (err) return next(err);
+
+    req.user.jawbone_token = token;
+
+    req.user.save(function(err) {
+      if (err) return next(err);
+      res.redirect('/connect');
+    });
   });
 });
 

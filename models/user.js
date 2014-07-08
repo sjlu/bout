@@ -28,6 +28,9 @@ var User = new mongoose.Schema({
   },
   withings_secret: {
     type: String
+  },
+  jawbone_token: {
+    type: String
   }
 });
 
