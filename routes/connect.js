@@ -3,6 +3,7 @@ var router = express.Router();
 var withings = require('../lib/withings');
 var middlewares = require('../middlewares');
 var jawbone = require('../lib/jawbone');
+var kue = require('../lib/kue');
 
 router.use(middlewares.session);
 router.use(middlewares.user);
@@ -30,8 +31,15 @@ router.get('/withings/callback', function(req, res, next) {
 
     req.user.save(function(err) {
       if (err) return next(err);
-      res.redirect('/connect');
-    })
+
+      kue.create('processWithingsConnection', {
+        uid: req.user.id
+      }).save(function(err) {
+        if (err) return next(err);
+        res.redirect('/connect');
+      });
+
+    });
   });
 });
 
