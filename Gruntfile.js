@@ -1,20 +1,15 @@
+var path = require('path');
+
 module.exports = function (grunt) {
   grunt.initConfig({
-
-    files: {
-      less: ['public/assets/less/**/*.less']
-    },
 
     /**
      * JS concatenation
      */
     concat: {
-      options: {
-        separator: ';'
-      },
       client: {
         src: ['client/**/*.js'],
-        dest: 'public/client.js'
+        dest: 'public/build/client/app.js'
       }
     },
 
@@ -32,7 +27,7 @@ module.exports = function (grunt) {
       },
       default: {
         files: {
-          "public/styles.css": "public/stylesheets/style.less"
+          "public/build/styles.css": "public/stylesheets/style.less"
         }
       }
     },
@@ -40,21 +35,16 @@ module.exports = function (grunt) {
     /**
      * Template compilation
      */
-    template: {
-      dist: {
-        options: {
-          wrap: {
-            banner: '<script type="text/ng-template" id="#{0}">',
-            footer: '</script>',
-            inject: [{
-              prop: 'src',
-              rem: /^.*\//
-            }],
-          }
+    html2js: {
+      options: {
+        rename: function(name) {
+          return path.basename(name).replace('.jade', '.tmpl');
         },
-        files: {
-          'public/client.html': 'client/**/*.html',
-        }
+        module: 'templates'
+      },
+      client: {
+        src: ['client/**/*.jade'],
+        dest: 'public/build/client/templates.js'
       }
     },
 
@@ -71,6 +61,14 @@ module.exports = function (grunt) {
       less: {
         files: ['public/stylesheets/**/*.less'],
         tasks: ['less']
+      },
+      js: {
+        files: ['client/**/*.js'],
+        tasks: ['concat']
+      },
+      html: {
+        files: ['client/**/*.jade'],
+        tasks: ['html2js']
       }
     }
 
@@ -89,5 +87,5 @@ module.exports = function (grunt) {
   /*
    * Tasks
    */
-  grunt.registerTask('default', ['less', 'template', 'concat']);
+  grunt.registerTask('default', ['less', 'html2js', 'concat']);
 };

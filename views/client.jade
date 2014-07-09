@@ -1,13 +1,14 @@
 extends ./layout
 
 block body
-  div.container
+  div.container(ng-app="bout")
     div(topbar)
+    div(ng-view)
 
 block scripts
   script(src="/bower_components/angular/angular.min.js")
   script(src="/bower_components/angular-route/angular-route.min.js")
+  script(src="/build/client/templates.js")
   script
-    | window.bout = angular.module('bout', ['ngRoute']);
-  include ../public/client.html
-  script(src="/client.js")
+    | window.bout = angular.module('bout', ['ngRoute', 'templates']);
+  script(src="/build/client/app.js")

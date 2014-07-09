@@ -1,13 +1,13 @@
 bout.config(['$routeProvider', function($routeProvider, $locationProvider) {
 
   var routes = {
-    '/': 'index'
+    '/': 'overview'
   };
 
   for (var route in routes) {
     var controller = routes[route];
     $routeProvider.when(route, {
-      templateUrl: controller + '.html',
+      templateUrl: controller + '.tmpl',
       controller: controller
     });
   }
