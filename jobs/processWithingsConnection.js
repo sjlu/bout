@@ -26,7 +26,9 @@ module.exports = function(job, done) {
             if (err) return cb(err);
             var date = moment(data.date).format('YYYYMMDD');
             models.Activity.findOrCreate(user, date, function(err, activity) {
-              activity.steps = data.steps;
+              if (data.steps) {
+                activity.steps = data.steps;
+              }
               activity.save(cb);
             });
           });
