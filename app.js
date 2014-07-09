@@ -8,7 +8,6 @@ var mongoose = require('./lib/mongoose');
 var flash = require('express-flash');
 var session = require('express-session');
 var config = require('./lib/config');
-var lessMiddleware = require('less-middleware');
 var RedisStore = require('connect-redis')(session);
 var redis = require('./lib/redis');
 
@@ -32,7 +31,6 @@ app.use(session({
   resave: true
 }));
 app.use(flash());
-app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
@@ -41,7 +39,6 @@ app.use('/register', require('./routes/register'));
 app.use('/logout', require('./routes/logout'));
 app.use('/connect', require('./routes/connect'));
 app.use('/callbacks', require('./routes/callbacks'));
-app.use('/dashboard', require('./routes/dashboard'));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
