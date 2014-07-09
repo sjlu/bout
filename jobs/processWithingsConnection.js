@@ -9,6 +9,9 @@ var _ = require('lodash');
 // backfill days in the past.
 module.exports = function(job, done) {
   var uid = job.data.uid;
+
+  console.log('processing new withings connection', uid);
+
   models.User.findOne({
     _id: uid
   }, function(err, user) {
