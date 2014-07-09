@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models');
 var validator = require('validator');
+var middlewares = require('../middlewares');
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', middlewares.loggedin, function(req, res) {
   res.render('register');
 });
 

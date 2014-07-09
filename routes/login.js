@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models');
+var middlewares = require('../middlewares');
 
-router.get('/', function(req, res) {
+router.get('/', middlewares.loggedin, function(req, res) {
   res.render('login');
 });
 
