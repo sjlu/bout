@@ -8,6 +8,8 @@ module.exports = function(job, done) {
   var start_date = moment(job.data.start_date).format('YYYY-MM-DD');
   var end_date = moment(job.data.end_date).format('YYYY-MM-DD');
 
+  console.log("processing withings update", withings_id, start_date, end_date);
+
   async.waterfall([
     function(cb) {
       models.User.findOne({
