@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "worker": "node ./bin/worker",
     "dev": "export ENV=development; node-dev ./bin/www",
-    "dev-worker": "node-dev ./bin/worker",
+    "dev-worker": "node-dev ./bin/worker"
   },
   "dependencies": {
     "URIjs": "^1.13.2",
