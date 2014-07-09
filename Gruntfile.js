@@ -6,6 +6,19 @@ module.exports = function (grunt) {
     },
 
     /**
+     * JS concatenation
+     */
+    concat: {
+      options: {
+        separator: ';'
+      },
+      client: {
+        src: ['client/**/*.js'],
+        dest: 'public/client.js'
+      }
+    },
+
+    /**
      * LESS compilation
      * If you are creating any new files they
      * should all be referenced in base.less
@@ -20,6 +33,27 @@ module.exports = function (grunt) {
       default: {
         files: {
           "public/styles.css": "public/stylesheets/style.less"
+        }
+      }
+    },
+
+    /**
+     * Template compilation
+     */
+    template: {
+      dist: {
+        options: {
+          wrap: {
+            banner: '<script type="text/ng-template" id="#{0}">',
+            footer: '</script>',
+            inject: [{
+              prop: 'src',
+              rem: /^.*\//
+            }],
+          }
+        },
+        files: {
+          'public/client.html': 'client/**/*.html',
         }
       }
     },
@@ -55,5 +89,5 @@ module.exports = function (grunt) {
   /*
    * Tasks
    */
-  grunt.registerTask('default', ['less']);
+  grunt.registerTask('default', ['less', 'template', 'concat']);
 };

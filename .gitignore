@@ -1,5 +1,7 @@
 node_modules/*
 public/bower_components/*
 public/stylesheets/style.css
-public/styles.css
 npm-debug.log
+public/*.html
+public/*.css
+public/*.js
