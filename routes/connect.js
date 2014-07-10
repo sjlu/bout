@@ -58,7 +58,7 @@ router.get('/jawbone/callback', function(req, res, next) {
 
     req.user.jawbone_token = token;
 
-    async.waterfall([
+    async.series([
       function(cb) {
         req.user.save(cb);
       },
