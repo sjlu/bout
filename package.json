@@ -30,7 +30,8 @@
     "request": "^2.37.0",
     "static-favicon": "~1.0.0",
     "uid": "0.0.2",
-    "validator": "^3.16.0"
+    "validator": "^3.16.0",
+    "MD5": "^1.2.1"
   },
   "devDependencies": {
     "grunt-contrib-less": "^0.11.3",
