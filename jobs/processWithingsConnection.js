@@ -12,9 +12,7 @@ module.exports = function(job, done) {
 
   console.log('processing new withings connection', uid);
 
-  models.User.findOne({
-    _id: uid
-  }, function(err, user) {
+  models.User.findById(uid, function(err, user) {
     if (err) return done(err);
     async.parallel([
       function(cb) {

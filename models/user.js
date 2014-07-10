@@ -30,6 +30,9 @@ var User = new mongoose.Schema({
   withings_secret: {
     type: String
   },
+  jawbone_id: {
+    type: String
+  },
   jawbone_token: {
     type: String
   }
@@ -65,6 +68,7 @@ User.method('toJSON', function() {
   delete user.withings_id;
   delete user.withings_token;
   delete user.withings_secret;
+  delete user.jawbone_id;
   delete user.jawbone_token;
   return user;
 });
