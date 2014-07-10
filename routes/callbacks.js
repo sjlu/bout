@@ -41,6 +41,9 @@ router.post('/withings', function(req, res, next) {
 router.post('/jawbone', function(req, res, next) {
   var body = req.body;
   async.each(body.events, function(evt, cb) {
+
+    console.log("received jawbone callback for:", evt.user_xid, evt);
+
     kue.create('jawboneUpdate', {
       jawbone_id: evt.user_xid,
       timestamp: evt.timestamp
