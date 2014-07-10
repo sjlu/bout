@@ -44,7 +44,7 @@ router.post('/jawbone', function(req, res, next) {
     kue.create('jawboneUpdate', {
       jawbone_id: evt.user_xid,
       timestamp: evt.timestamp
-    });
+    }).save(cb);
   }, function(err) {
     if (err) return next(err);
     res.send("OK");
