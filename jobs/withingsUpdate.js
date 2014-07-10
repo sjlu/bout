@@ -28,6 +28,7 @@ module.exports = function(job, done) {
           if (err) return cb(err);
           date = moment(data.date).format('YYYYMMDD');
           models.Activity.findOrCreate(user, date, function(err, activity) {
+            console.log('update:', user._id, date, data.steps);
             activity.steps = data.steps;
             activity.save(cb);
           });

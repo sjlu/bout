@@ -21,6 +21,7 @@ module.exports = function(job, done) {
       jawbone.getSteps(start, end, user, function(err, data) {
         async.each(data, function(day, cb) {
           models.Activity.findOrCreate(user, day.date, function(err, act) {
+            console.log('update:', user._id, day.date, day.steps);
             if (day.steps) {
               act.steps = day.steps;
             }
