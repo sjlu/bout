@@ -7,7 +7,7 @@ block body
         include ./flash
         form.auth(method="POST")
           div.auth-input.auth-separator
-            input.form-control(type="text", name="username", placeholder="Username")
+            input.form-control(type="text", name="username", placeholder="Username", autocapitalize="off", autocorrect="off")
           div.auth-input
             input.form-control(type="password", name="password", placeholder="Password")
           div
