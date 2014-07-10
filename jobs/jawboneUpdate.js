@@ -6,8 +6,8 @@ var async = require('async');
 module.exports = function(job, done) {
   var jawbone_id = job.data.jawbone_id;
   var timestamp = job.data.timestamp;
-  var start = moment(timestamp*1).startOf('day').format('X');
-  var end = moment(timestamp*1).add(1, 'day').startOf('day').format('X');
+  var start = moment.unix(timestamp*1).startOf('day').format('X');
+  var end = moment.unix(timestamp*1).add(1, 'day').startOf('day').format('X');
 
   console.log("processing jawbone update", jawbone_id, start, end);
 
