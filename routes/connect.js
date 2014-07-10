@@ -4,6 +4,7 @@ var withings = require('../lib/withings');
 var middlewares = require('../middlewares');
 var jawbone = require('../lib/jawbone');
 var kue = require('../lib/kue');
+var async = require('async');
 
 router.use(middlewares.session);
 router.use(middlewares.user);
@@ -57,7 +58,16 @@ router.get('/jawbone/callback', function(req, res, next) {
 
     req.user.jawbone_token = token;
 
-    req.user.save(function(err) {
+    async.waterfall([
+      function(cb) {
+        req.user.save(cb);
+      },
+      function(cb) {
+        kue.create('processJawboneConnection', {
+          uid: req.user.id
+        }).save(cb);
+      }
+    ], function(err) {
       if (err) return next(err);
       res.redirect('/connect');
     });
