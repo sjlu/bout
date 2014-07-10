@@ -39,10 +39,10 @@ router.post('/', function(req, res, next) {
     password: password
   });
 
-  user.save(function(err) {
+  user.save(function(err, user) {
     if (err) return next(err);
-    req.flash('info', 'Account created, please login.');
-    res.redirect('/login');
+    req.session.uid = user._id;
+    res.redirect('/');
   });
 });
 
