@@ -6,5 +6,6 @@ router.use(middlewares.session);
 router.use(middlewares.user);
 
 router.use('/me', require('./me'));
+router.use('/activity', require('./activity'))
 
 module.exports = router;
