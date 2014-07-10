@@ -5,6 +5,8 @@ var md5 = require('MD5');
 var User = new mongoose.Schema({
   email: {
     type: String,
+    lowercase: true,
+    trim: true,
     required: true,
     index: {
       unique: true
@@ -12,6 +14,8 @@ var User = new mongoose.Schema({
   },
   username: {
     type: String,
+    lowercase: true,
+    trim: true,
     require: true,
     index: {
       unique: true
