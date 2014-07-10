@@ -2,13 +2,15 @@ extends ./layout
 
 block body
   div.container(ng-app="bout")
-    div(topbar)
+    div.topbar.clearfix(topbar)
     div(ng-view)
 
 block scripts
   script(src="/bower_components/angular/angular.min.js")
   script(src="/bower_components/angular-route/angular-route.min.js")
+  script(src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js")
+  script(src="/bower_components/lodash/dist/lodash.min.js")
   script(src="/build/client/templates.js")
   script
-    | window.bout = angular.module('bout', ['ngRoute', 'templates']);
+    | window.bout = angular.module('bout', ['ngRoute', 'templates', 'ui.bootstrap']);
   script(src="/build/client/app.js")

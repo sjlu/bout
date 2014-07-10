@@ -39,6 +39,7 @@ app.use('/register', require('./routes/register'));
 app.use('/logout', require('./routes/logout'));
 app.use('/connect', require('./routes/connect'));
 app.use('/callbacks', require('./routes/callbacks'));
+app.use('/api', require('./routes/api'));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

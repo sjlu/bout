@@ -1,0 +1,31 @@
+div.section-header
+  | Connections
+div.section-body
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Withings
+        div.small
+          | Connects your Withings Activity Tracker
+          br
+          a(href="http://withings.com" target="_new")
+            | withings.com
+    div.col-sm-8
+      a.btn.btn-primary(href="/connect/withings" ng-show="!user.has_withings")
+        | Connect
+      a.btn.btn-danger(ng-click="disconnect('withings')" ng-show="user.has_withings")
+        | Disconnect
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Jawbone
+        div.small
+          | Connects your UP devices
+          br
+          a(href="http://jawbone.com" target="_new")
+            | jawbone.com
+    div.col-sm-8
+      a.btn.btn-primary(href="/connect/jawbone" ng-show="!user.has_jawbone")
+        | Connect
+      a.btn.btn-danger(ng-click="disconnect('jawbone')" ng-show="user.has_jawbone")
+        | Disconnect

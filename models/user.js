@@ -1,5 +1,6 @@
 var mongoose = require('../lib/mongoose');
 var bcrypt = require('bcrypt');
+var md5 = require('MD5');
 
 var User = new mongoose.Schema({
   email: {
@@ -57,5 +58,35 @@ User.methods.authenticate = function(password, cb) {
     cb(null, match);
   });
 }
+
+User.method('toJSON', function() {
+  var user = this.toObject({virtuals: true});
+  delete user.password;
+  delete user.withings_id;
+  delete user.withings_token;
+  delete user.withings_secret;
+  delete user.jawbone_token;
+  return user;
+});
+
+User.virtual('gravatar').get(function() {
+  return 'https://www.gravatar.com/avatar/' + md5(this.email) + '.jpg';
+});
+
+User.virtual('has_withings').get(function() {
+  if (this.withings_id) {
+    return true;
+  }
+
+  return false;
+});
+
+User.virtual('has_jawbone').get(function() {
+  if (this.jawbone_token) {
+    return true;
+  }
+
+  return false;
+});
 
 module.exports = mongoose.model('User', User);

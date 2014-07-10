@@ -9,7 +9,7 @@ router.use(middlewares.session);
 router.use(middlewares.user);
 
 router.get('/', function(req, res, next) {
-  res.render('connect');
+  res.redirect('/#/connect');
 });
 
 router.get('/withings', function(req, res, next) {
