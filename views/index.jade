@@ -2,10 +2,10 @@ extends layout
 
 block body
   div.container.frontpage
-    include ./flash
     div.text-right
       a.btn.btn-link(href="/login")
         | Login
+    include ./flash
     div.frontpage-headline-box
       img.logo.logo-lg.img-responsive(src="/images/logo_black.png")
       h2
