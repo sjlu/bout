@@ -1,5 +1,17 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block body
+  div.container.frontpage
+    include ./flash
+    div.text-right
+      a.btn.btn-link(href="/login")
+        | Login
+    div.frontpage-headline-box
+      img(src="/images/logo_black.png")
+      h2
+        | Get ready for a whole new reason to use your fitness tracker
+    div.frontpage-register-box
+      form(method="POST")
+        input.input-lg(type="email", name="email" placeholder="Your email")
+        button.btn.btn-primary.btn-lg(type="submit")
+          | Notify Me
