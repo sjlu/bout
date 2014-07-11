@@ -1,22 +1,29 @@
 div.row
   div.col-sm-6
+    img.logo.logo-xs(src="/images/logo_black.png")
   div.col-sm-6.text-right
-    div.gravatar(dropdown).clearfix
-      div.dropdown-toggle
-        img(src="{{user.gravatar}}")
-        i.fa.fa-caret-down
-      ul.dropdown-menu
-        li
-          a(href="#/account")
-            div
-              | {{user.email}}
-              div.small
-                | Your Account
-          a(href="#/connect")
-            div
-              | Connections
-              div.small
-                | Your Connected Devices
-          a(href="/logout")
-            | Logout
-    div
+    ul.menu
+      li
+        a(href="#/")
+          | Your Activity
+      li
+        | &middot;
+      li
+        div.gravatar(dropdown).clearfix
+          div.dropdown-toggle
+            img(src="{{user.gravatar}}")
+            i.fa.fa-caret-down
+          ul.dropdown-menu
+            li
+              a(href="#/account")
+                div
+                  | {{user.email}}
+                  div.small
+                    | Your Account
+              a(href="#/connect")
+                div
+                  | Connections
+                  div.small
+                    | Your Connected Devices
+              a(href="/logout")
+                | Logout

@@ -25,5 +25,8 @@
     "angular-bootstrap": "~0.11.0",
     "angular-moment": "~0.7.1",
     "moment": "~2.7.0"
+  },
+  "resolutions": {
+    "moment": ">=2.0.0 <2.7.0"
   }
 }
