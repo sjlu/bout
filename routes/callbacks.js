@@ -54,4 +54,19 @@ router.post('/jawbone', function(req, res, next) {
   });
 });
 
+router.post('/fitbit', function(req, res, next) {
+  var body = req.body;
+  console.log('fitbit callback', body);
+  async.each(body.events, function(evt, cb) {
+    kue.create('fitbitUpdate', {
+      fitbit_id: evt.ownerId,
+      date: evt.date
+    }).save(cb);
+
+  }, function(err) {
+    if (err) return next(err);
+    res.send("OK");
+  });
+})
+
 module.exports = router;

@@ -39,6 +39,15 @@ var User = new mongoose.Schema({
   },
   jawbone_token: {
     type: String
+  },
+  fitbit_id: {
+    type: String
+  },
+  fitbit_token: {
+    type: String
+  },
+  fitbit_secret: {
+    type: String
   }
 });
 

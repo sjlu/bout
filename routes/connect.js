@@ -5,6 +5,7 @@ var middlewares = require('../middlewares');
 var jawbone = require('../lib/jawbone');
 var kue = require('../lib/kue');
 var async = require('async');
+var fitbit = require('../lib/fitbit');
 
 router.use(middlewares.session);
 router.use(middlewares.user);
@@ -70,6 +71,36 @@ router.get('/jawbone/callback', function(req, res, next) {
     ], function(err) {
       if (err) return next(err);
       res.redirect('/connect');
+    });
+  });
+});
+
+router.get('/fitbit', function(req, res, next) {
+  fitbit.getRequestAccessUrl(function(err, url) {
+    if (err) return next(err);
+    res.redirect(url);
+  });
+});
+
+router.get('/fitbit/callback', function(req, res, next) {
+  var token = req.query.oauth_token;
+  var verifier = req.query.oauth_verifier
+  fitbit.getRequestToken(token, verifier, function(err, creds) {
+    if (err) return next(err);
+
+    req.user.fitbit_token = creds.token;
+    req.user.fitbit_secret = creds.secret
+
+    req.user.save(function(err) {
+      if (err) return next(err);
+
+      kue.create('processFitbitConnection', {
+        uid: req.user.id
+      }).save(function(err) {
+        if (err) return next(err);
+        res.redirect('/connect');
+      });
+
     });
   });
 });
