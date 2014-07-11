@@ -25,7 +25,7 @@ router.post('/withings', function(req, res, next) {
     end_date = date;
   }
 
-  console.log("received callback from withings for:", withings_id);
+  console.log("callback:", "withings", withings_id);
 
   var query = req.query;
   kue.create('updateWithings', {
@@ -42,7 +42,7 @@ router.post('/jawbone', function(req, res, next) {
   var body = req.body;
   async.each(body.events, function(evt, cb) {
 
-    console.log("received jawbone callback for:", evt.user_xid, evt);
+    console.log("callback:", "jawbone", evt.user_xid);
 
     kue.create('updateJawbone', {
       jawbone_id: evt.user_xid,
@@ -58,7 +58,7 @@ router.post('/fitbit', function(req, res, next) {
   var body = req.body;
   async.each(body, function(evt, cb) {
 
-    console.log("fitbit callback", evt.ownerId, evt.date);
+    console.log("fitbit callback", evt.ownerId);
 
     kue.create('updateFitbit', {
       fitbit_id: evt.ownerId,
