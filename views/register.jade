@@ -1,11 +1,12 @@
 extends ./layout
 
 block body
-  div.container
+  div.container.auth
     div.row
-      div.col-md-offset-4.col-md-4.box
+      div.col-md-offset-4.col-md-4.box.text-center
+        img.logo.logo-sm(src="/images/logo_black.png")
         include ./flash
-        form.auth(method="POST")
+        form(method="POST")
           div.auth-input.auth-separator
             input.form-control(type="email", name="email", placeholder="Email", autocapitalize="off", autocorrect="off")
           div.auth-input.auth-separator
