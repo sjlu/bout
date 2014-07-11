@@ -83,11 +83,22 @@ User.method('toJSON', function() {
   delete user.withings_secret;
   delete user.jawbone_id;
   delete user.jawbone_token;
+  delete user.fitbit_id;
+  delete user.fitbit_token;
+  delete user.fitbit_secret;
   return user;
 });
 
 User.virtual('gravatar').get(function() {
   return 'https://www.gravatar.com/avatar/' + md5(this.email) + '.jpg';
+});
+
+User.virtual('has_fitbit').get(function() {
+  if (this.fitbit_id) {
+    return true;
+  }
+
+  return false;
 });
 
 User.virtual('has_withings').get(function() {

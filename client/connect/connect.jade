@@ -29,3 +29,17 @@ div.section-body
         | Connect
       a.btn.btn-danger(ng-click="disconnect('jawbone')" ng-show="user.has_jawbone")
         | Disconnect
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Fitbit
+        div.small
+          | Connects your Fitbit devices
+          br
+          a(href="http://fitbit.com" target="_new")
+            | fitbit.com
+    div.col-sm-8
+      a.btn.btn-primary(href="/connect/fitbit" ng-show="!user.has_fitbit")
+        | Connect
+      a.btn.btn-danger(ng-click="disconnect('fitbit')" ng-show="user.has_fitbit")
+        | Disconnect
