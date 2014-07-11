@@ -22,7 +22,6 @@ module.exports = function(job, done) {
       function(cb) {
         async.each(_.range(0, 8), function(day, cb) {
           var date = moment().subtract(day, 'day').format('X');
-          console.log(date);
           kue.create('updateWithings', {
             withings_id: user.withings_id,
             start_date: date,
