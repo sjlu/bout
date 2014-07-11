@@ -5,7 +5,7 @@ var models = require('../../models');
 router.get('/', function(req, res, next) {
   models.Activity.find({
     _uid: req.user._id
-  }, function(err, activity) {
+  }).sort({date: -1}).limit(6).exec(function(err, activity) {
     if (err) return next(err);
     res.json(activity);
   });

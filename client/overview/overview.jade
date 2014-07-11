@@ -1,1 +1,12 @@
-div
+div.section-header
+  | Your Activity
+div.section-body
+  div.section-column.row
+    div.col-sm-2.text-center(ng-repeat="a in activity")
+      div.panel.panel-default
+        div.panel-body
+          h2
+           | {{a.steps | number}}
+        div.panel-footer
+          span.small
+            | {{a.date}}

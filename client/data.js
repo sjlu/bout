@@ -91,6 +91,13 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
             update('me', data);
           });
         }
+      },
+      activity: {
+        get: function() {
+          request("GET", "/api/activity", {}, function(err, data) {
+            update('activity', data);
+          });
+        }
       }
 
     };
