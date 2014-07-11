@@ -35,7 +35,7 @@ Activity.statics.findOrCreate = function(user, date, cb) {
 };
 
 Activity.statics.updateStepsForUserOnDate = function(user, date, steps, cb) {
-  models.Activity.findOrCreate(user, date, function(err, activity) {
+  this.findOrCreate(user, date, function(err, activity) {
     console.log('activity update:', user._id, date, steps);
     if (steps) {
       activity.steps = steps;
