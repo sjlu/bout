@@ -1,0 +1,22 @@
+div.section-header
+  | Account
+div.section-body
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Username
+        div.small
+          | What everyone else calls you by.
+    div.col-sm-8
+      div.col-xs-6
+        input.form-control(type="text", disabled="true", value="{{user.username}}")
+
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Email
+        div.small
+          | Where do we notify you at?
+    div.col-sm-8
+      div.col-xs-6
+        input.form-control(type="email", disabled="true", value="{{user.email}}")
