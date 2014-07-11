@@ -56,8 +56,10 @@ router.post('/jawbone', function(req, res, next) {
 
 router.post('/fitbit', function(req, res, next) {
   var body = req.body;
-  console.log('fitbit callback', body);
-  async.each(body.events, function(evt, cb) {
+  async.each(body, function(evt, cb) {
+
+    console.log("fitbit callback", evt.ownerId, evt.date);
+
     kue.create('fitbitUpdate', {
       fitbit_id: evt.ownerId,
       date: evt.date
