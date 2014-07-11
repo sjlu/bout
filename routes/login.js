@@ -2,31 +2,30 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models');
 var middlewares = require('../middlewares');
+var auth = require('../lib/auth');
 
 router.get('/', middlewares.loggedin, function(req, res) {
   res.render('login');
 });
 
 router.post('/', function(req, res, next) {
-  var username = req.body.username;
-  models.User.findOne({
-    username: username
-  }, function(err, user) {
-    if (err) return next(err);
-
-    if (!user) {
+  auth.authenticate(req.body.username, req.body.password, function(err, uid) {
+    if (!uid) {
       req.flash('error', 'Unknown username and password combination.');
       return res.redirect('/login');
     }
 
-    user.authenticate(req.body.password, function(err, match) {
+    req.session.uid = uid;
+    return res.redirect('/');
+  });
+
+});
+
+router.post('/token', function(req, res, next) {
+  auth.authenticate(req.body.username, req.body.password, function(err, uid) {
+    auth.createToken(uid, function(err, token) {
       if (err) return next(err);
-      if (!match) {
-        req.flash('error', 'Unknown username and password combination.');
-        return res.redirect('/login');
-      }
-      req.session.uid = user._id;
-      return res.redirect('/');
+      res.send(token);
     });
   });
 });
