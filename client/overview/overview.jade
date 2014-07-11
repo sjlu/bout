@@ -2,11 +2,11 @@ div.section-header
   | Your Activity
 div.section-body
   div.section-column.row
-    div.col-sm-2.text-center(ng-repeat="a in activity")
-      div.panel.panel-default
+    div.col-sm-2.text-center(ng-repeat="(i, a) in activity")
+      div.panel(ng-class="{'panel-default': i != 0, 'panel-primary': i == 0}")
         div.panel-body
           h2
            | {{a.steps | number}}
-        div.panel-footer
+        div.panel-footer(ng-class="{'panel-default': i != 0, 'panel-primary': i == 0}")
           span.small
-            | {{a.date}}
+            | {{a.displayDate}}
