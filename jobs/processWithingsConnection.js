@@ -20,17 +20,15 @@ module.exports = function(job, done) {
         withings.subscribe(user, cb);
       },
       function(cb) {
-        async.each(_.range(0, 7), function(day, cb) {
+        async.each(_.range(0, 8), function(day, cb) {
           var date = moment().subtract(day, 'day').format('X');
+          console.log(date);
           kue.create('updateWithings', {
             withings_id: user.withings_id,
             start_date: date,
             end_date: date
           }).save(cb);
-        }, function(err) {
-          if (err) return cb(err);
-          cb();
-        });
+        }, cb);
       }
     ], function(err) {
       if (err) return done(err);

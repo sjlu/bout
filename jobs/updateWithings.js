@@ -5,8 +5,8 @@ var async = require('async');
 
 module.exports = function(job, done) {
   var withings_id = job.data.withings_id;
-  var start_date = moment(job.data.start_date).format('YYYY-MM-DD');
-  var end_date = moment(job.data.end_date).format('YYYY-MM-DD');
+  var start_date = moment.unix(job.data.start_date*1).format('YYYY-MM-DD');
+  var end_date = moment.unix(job.data.end_date*1).format('YYYY-MM-DD');
 
   console.log('update:', 'withings', withings_id, start_date, end_date);
 
@@ -29,7 +29,7 @@ module.exports = function(job, done) {
           date = moment(data.date).format('YYYYMMDD');
           models.Activity.updateStepsForUserOnDate(user, date, data.steps, cb);
         });
-      });
+      }, cb);
     }
   ], done);
 
