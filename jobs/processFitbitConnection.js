@@ -8,7 +8,7 @@ var kue = require('../lib/kue');
 module.exports = function(job, done) {
   var uid = job.data.uid;
 
-  console.log('processing new fitbit connection', uid);
+  console.log('connection:', 'fitbit', uid);
 
   async.waterfall([
     function(cb) {
@@ -35,7 +35,7 @@ module.exports = function(job, done) {
       var start = moment().subtract(7, 'days').startOf('day');
       async.each(_.range(0,8), function(days, cb) {
         var date = moment(start).add(days, 'days').format('YYYY-MM-DD');
-        kue.create('fitbitUpdate', {
+        kue.create('updateFitbit', {
           fitbit_id: user.fitbit_id,
           date: date
         }).save(cb);

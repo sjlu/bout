@@ -41,6 +41,9 @@ router.post('/', function(req, res, next) {
 
   user.save(function(err, user) {
     if (err) return next(err);
+
+    console.log('new user:', user._id, user.email);
+
     req.session.uid = user._id;
     res.redirect('/');
   });

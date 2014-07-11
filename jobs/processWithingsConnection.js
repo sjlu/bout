@@ -3,6 +3,7 @@ var withings = require('../lib/withings');
 var moment = require('moment');
 var async = require('async');
 var _ = require('lodash');
+var kue = require('../lib/kue');
 
 // this will subscribe to the appropriate
 // modules that we need to listen to and
@@ -10,7 +11,7 @@ var _ = require('lodash');
 module.exports = function(job, done) {
   var uid = job.data.uid;
 
-  console.log('processing new withings connection', uid);
+  console.log('connection:', 'withings', uid);
 
   models.User.findById(uid, function(err, user) {
     if (err) return done(err);
@@ -20,16 +21,12 @@ module.exports = function(job, done) {
       },
       function(cb) {
         async.each(_.range(0, 7), function(day, cb) {
-          withings.getSteps(user, moment().subtract(day, 'day').format('YYYY-MM-DD'), function(err, data) {
-            if (err) return cb(err);
-            var date = moment(data.date).format('YYYYMMDD');
-            models.Activity.findOrCreate(user, date, function(err, activity) {
-              if (data.steps) {
-                activity.steps = data.steps;
-              }
-              activity.save(cb);
-            });
-          });
+          var date = moment().subtract(day, 'day').format('X');
+          kue.create('updateWithings', {
+            withings_id: user.withings_id,
+            start_date: date,
+            end_date: date
+          }).save(cb);
         }, function(err) {
           if (err) return cb(err);
           cb();

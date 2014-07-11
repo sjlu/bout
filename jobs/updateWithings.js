@@ -8,7 +8,7 @@ module.exports = function(job, done) {
   var start_date = moment(job.data.start_date).format('YYYY-MM-DD');
   var end_date = moment(job.data.end_date).format('YYYY-MM-DD');
 
-  console.log("processing withings update", withings_id, start_date, end_date);
+  console.log('update:', 'withings', withings_id, start_date, end_date);
 
   async.waterfall([
     function(cb) {
@@ -27,11 +27,7 @@ module.exports = function(job, done) {
         withings.getSteps(user, date, function(err, data) {
           if (err) return cb(err);
           date = moment(data.date).format('YYYYMMDD');
-          models.Activity.findOrCreate(user, date, function(err, activity) {
-            console.log('update:', user._id, date, data.steps);
-            activity.steps = data.steps;
-            activity.save(cb);
-          });
+          models.Activity.updateStepsForUserOnDate(user, date, data.steps, cb);
         });
       });
     }

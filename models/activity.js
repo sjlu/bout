@@ -34,6 +34,16 @@ Activity.statics.findOrCreate = function(user, date, cb) {
   });
 };
 
+Activity.statics.updateStepsForUserOnDate = function(user, date, steps, cb) {
+  models.Activity.findOrCreate(user, date, function(err, activity) {
+    console.log('activity update:', user._id, date, steps);
+    if (steps) {
+      activity.steps = steps;
+    }
+    activity.save(cb);
+  });
+}
+
 Activity.index({_uid: 1, date: 1}, {unique: true});
 
 module.exports = mongoose.model('Activity', Activity);
