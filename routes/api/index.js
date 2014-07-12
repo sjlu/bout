@@ -5,6 +5,7 @@ var middlewares = require('../../middlewares');
 router.use(middlewares.requiresLogin);
 
 router.use('/me', require('./me'));
-router.use('/activity', require('./activity'))
+router.use('/activity', require('./activity'));
+router.use('/friends', require('./friends'));
 
 module.exports = router;
