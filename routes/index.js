@@ -10,7 +10,7 @@ var renderClient = function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if (req.session.uid) {
+  if (req.user) {
     return renderClient(req, res, next);
   }
 

@@ -10,6 +10,7 @@ var session = require('express-session');
 var config = require('./lib/config');
 var RedisStore = require('connect-redis')(session);
 var redis = require('./lib/redis');
+var middlewares = require('./middlewares');
 
 var app = express();
 
@@ -32,6 +33,8 @@ app.use(session({
 }));
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(middlewares.getUserFromAuth);
 
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));

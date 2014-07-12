@@ -7,8 +7,7 @@ var kue = require('../lib/kue');
 var async = require('async');
 var fitbit = require('../lib/fitbit');
 
-router.use(middlewares.session);
-router.use(middlewares.user);
+router.use(middlewares.requiresLogin);
 
 router.get('/', function(req, res, next) {
   res.redirect('/#/connect');

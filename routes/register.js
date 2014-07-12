@@ -5,7 +5,7 @@ var validator = require('validator');
 var middlewares = require('../middlewares');
 
 /* GET home page. */
-router.get('/', middlewares.loggedin, function(req, res) {
+router.get('/', middlewares.redirectIfLoggedIn, function(req, res) {
   res.render('register');
 });
 
