@@ -20,20 +20,22 @@ module.exports = function(req, res, next) {
       },
       function(token, cb) {
         if (!token) {
-          return cb();
+          return cb(new Error());
         }
 
         models.User.findById(token._uid, cb);
       },
       function(user, cb) {
         if (!user) {
-          return cb();
+          return cb(new Error());
         }
 
         req.user = user;
         cb();
       }
-    ], next);
+    ], function(err) {
+      next();
+    });
   } else {
     next();
   }

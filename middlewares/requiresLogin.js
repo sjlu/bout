@@ -1,4 +1,4 @@
 module.exports = function(req, res, next) {
-  if (!req.user) return res.send(403, "Forbidden");
+  if (!req.user) return res.send(401);
   next();
 }
