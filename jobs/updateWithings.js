@@ -8,7 +8,6 @@ module.exports = function(job, done) {
   var start_date = moment(job.data.start_date, 'YYYY-MM-DD');
   var end_date = moment(job.data.end_date, 'YYYY-MM-DD');
 
-  console.log('update:', 'withings', withings_id, start_date, end_date);
 
   async.waterfall([
     function(cb) {
@@ -24,6 +23,7 @@ module.exports = function(job, done) {
         momentPointer.add(1, 'day');
       }
       async.each(datesToCheck, function(date, cb) {
+        console.log('update:', 'withings', withings_id, date);
         withings.getSteps(user, date, function(err, data) {
           if (err) return cb(err);
           date = moment(data.date).format('YYYYMMDD');
