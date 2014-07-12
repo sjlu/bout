@@ -117,4 +117,8 @@ User.virtual('has_jawbone').get(function() {
   return false;
 });
 
+User.virtual('has_tracker').get(function() {
+  return this.jawbone_token || this.fitbit_id || this.withings_id;
+});
+
 module.exports = mongoose.model('User', User);

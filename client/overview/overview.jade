@@ -2,7 +2,15 @@ div.section-header
   | Your Activity
 div.section-body
   div.section-column.row
-    div.col-sm-2.text-center(ng-repeat="(i, a) in activity")
+    div.nextsteps(ng-show="!user.has_tracker")
+      div.nextsteps-header
+        | Next Steps
+      a(href="#/connect")
+        div.nextsteps-step
+          span
+            | 1.
+          |  Add your fitness tracker
+    div.col-sm-2.text-center(ng-repeat="(i, a) in activity", ng-show="user.has_tracker")
       div.panel(ng-class="{'panel-default': i != 0, 'panel-primary': i == 0}")
         div.panel-body
           h2

@@ -6,4 +6,8 @@ bout.controller('overview', function($scope, DataManager) {
       return day;
     });
   });
+
+  DataManager.observe('me', function(data) {
+    $scope.user = data;
+  });
 });
