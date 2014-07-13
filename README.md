@@ -4,4 +4,4 @@ All these trackers kind of suck in terms of social aspects. My friend has a Jawb
 
 ### docs
 
-[INSTALL.md](Install)
+* [Install](INSTALL.md)
