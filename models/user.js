@@ -1,6 +1,7 @@
 var mongoose = require('../lib/mongoose');
 var bcrypt = require('bcrypt');
 var md5 = require('MD5');
+var textSearch = require('mongoose-text-search');
 
 var User = new mongoose.Schema({
   email: {
@@ -50,6 +51,9 @@ var User = new mongoose.Schema({
     type: String
   }
 });
+
+User.plugin(textSearch);
+User.index({username: 'text'});
 
 User.pre('save', function(next) {
   var self = this;
