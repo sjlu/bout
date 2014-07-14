@@ -16,6 +16,8 @@ module.exports = function(job, done) {
       }, cb);
     },
     function(user, cb) {
+      if (!user) return cb(new Error("no user by that withings_id: " + withings_id));
+      
       var momentPointer = moment(start_date);
       var datesToCheck = [];
       while (!momentPointer.isAfter(end_date)) {
