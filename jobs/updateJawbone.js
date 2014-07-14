@@ -19,6 +19,8 @@ module.exports = function(job, done) {
       }, cb);
     },
     function(user, cb) {
+      if (!user) return(new Error("could not find user for jawbone id " + jawbone_id));
+      
       jawbone.getSteps(start, end, user, function(err, data) {
         async.each(data, function(day, cb) {
           models.Activity.updateStepsForUserOnDate(user, day.date, day.steps, cb);
