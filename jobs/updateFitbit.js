@@ -16,6 +16,8 @@ module.exports = function(job, done) {
       }, cb);
     },
     function(user, cb) {
+      if (!user) return cb(new Error("could not find user with fitbit id:", fitbit_id));
+      
       fitbit.getSteps(date, user, function(err, data) {
         models.Activity.updateStepsForUserOnDate(user, data.date, data.steps, cb);
       });
