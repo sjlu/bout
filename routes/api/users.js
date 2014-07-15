@@ -8,19 +8,9 @@ router.get('/search', function(req, res, next) {
     return next(new Error("Expected something to search"));
   }
 
-  models.User.textSearch(req.query.query, function(err, output) {
+  models.User.searchForUser(req.query.query, function(err, users) {
     if (err) return next(err);
-
-    output = _.map(output.results, function(user) {
-      return {
-        score: user.score,
-        username: user.obj.username,
-        gravatar: user.obj.gravatar,
-        _id: user.obj.id
-      }
-    });
-
-    res.json(output);
+    res.json(users);
   });
 });
 

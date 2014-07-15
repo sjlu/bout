@@ -110,6 +110,12 @@ User.methods.updateInfo = function(fields, cb) {
   self.save(cb);
 }
 
+User.statics.searchForUser = function(input, cb) {
+  this.find({
+    "username": new RegExp(".*"+input+".*")
+  }, cb);
+}
+
 User.method('toJSON', function() {
   var user = this.toObject({virtuals: true});
   delete user.password;
