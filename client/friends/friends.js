@@ -18,9 +18,9 @@ bout.controller('friends', function($scope, DataManager, $http) {
     $http.post('/api/friends', {
       uid: $item._id
     }).then(function() {
-      $scope.addFriend = null;
       DataManager.methods.pending_friends.get();
     });
+    $scope.addFriend = null;
   }
 
   $scope.acceptFriendRequest = function(user) {
