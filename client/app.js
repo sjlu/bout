@@ -3,7 +3,8 @@ bout.config(['$routeProvider', function($routeProvider, $locationProvider) {
   var routes = {
     '/': 'overview',
     '/account': 'account',
-    '/connect': 'connect'
+    '/connect': 'connect',
+    '/friends': 'friends'
   };
 
   for (var route in routes) {

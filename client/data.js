@@ -98,6 +98,20 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
             update('activity', data);
           });
         }
+      },
+      friends: {
+        get: function() {
+          request("GET", "/api/leaderboards", {}, function(err, data) {
+            update('friends', data);
+          });
+        }
+      },
+      pending_friends: {
+        get: function() {
+          request("GET", "/api/friends/pending", {}, function(err, data) {
+            update('pending_friends', data);
+          });
+        }
       }
 
     };

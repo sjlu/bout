@@ -6,20 +6,25 @@ var async = require('async');
 
 router.get('/', function(req, res, next) {
   friends.friendsForUser(req.user, function(err, users) {
+    if (err) return next(err);
+    res.json(users);
+  });
+});
+
+router.get('/pending', function(req, res, next) {
+  friends.pendingForUser(req.user, function(err, users) {
+    if (err) return next(err);
     res.json(users);
   });
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   if (!req.body.uid) {
     return next(new Error('Expected a user id to make a friend of.'));
   }
 
-  models.Pair({
-    uid1: req.user._id,
-    uid2: req.body.uid
-  }).save(function(err, pair) {
+  models.Pair.createPair(req.user, req.body.uid, function(err, pair) {
+    if (err) return next(err);
     res.json(pair);
   });
 });
