@@ -3,6 +3,7 @@ var bcrypt = require('bcrypt');
 var md5 = require('MD5');
 var textSearch = require('mongoose-text-search');
 var mongooseValidator = require('mongoose-validator');
+var _ = require('lodash');
 
 var User = new mongoose.Schema({
   email: {
@@ -27,6 +28,14 @@ var User = new mongoose.Schema({
       passIfEmpty: false,
       message: "Username can only be alpha-numeric"
     })
+  },
+  first_name: {
+    type: String,
+    trim: true
+  },
+  last_name: {
+    type: String,
+    trim: true
   },
   password: {
     type: String,
@@ -85,6 +94,22 @@ User.methods.authenticate = function(password, cb) {
   });
 }
 
+User.methods.updateInfo = function(fields, cb) {
+  var self = this;
+
+  var updatableFields = [
+    "first_name",
+    "last_name"
+  ];
+
+  fields = _.pick(fields, updatableFields);
+  _.each(fields, function(value, field) {
+    self[field] = value;
+  });
+
+  self.save(cb);
+}
+
 User.method('toJSON', function() {
   var user = this.toObject({virtuals: true});
   delete user.password;
@@ -129,6 +154,10 @@ User.virtual('has_jawbone').get(function() {
 
 User.virtual('has_tracker').get(function() {
   return this.jawbone_token || this.fitbit_id || this.withings_id;
+});
+
+User.virtual('name').get(function() {
+  return this.first_name + " " + this.last_name;
 });
 
 module.exports = mongoose.model('User', User);

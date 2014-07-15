@@ -8,8 +8,22 @@ div.section-body
         div.small
           | What everyone else calls you by.
     div.col-sm-8
-      input.input-lg.form-control(type="text", disabled="true", value="{{user.username}}")
-
+      div.col-sm-12
+        input.input-lg.form-control(type="text", disabled="true", value="{{user.username}}")
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Name
+        div.small
+          | Knowing your full name makes your friends know who you are.
+    div.col-sm-8
+      div.col-sm-6
+        input.input-lg.form-control(type="text", ng-model="user.first_name", placeholder="First name", ng-change="nameChanged = true;")
+      div.col-sm-6
+        input.input-lg.form-control(type="text", ng-model="user.last_name", placeholder="Last name", ng-change="nameChanged = true;")
+      div.col-sm-6
+        button.btn.btn-lg.btn-primary(ng-click="saveName()", ng-show="nameChanged")
+          | Save
   div.section-column.row
     div.col-sm-4
       div.section-column-header
@@ -17,4 +31,5 @@ div.section-body
         div.small
           | Where do we notify you at?
     div.col-sm-8
-      input.input-lg.form-control(type="email", disabled="true", value="{{user.email}}")
+      div.col-sm-12
+        input.input-lg.form-control(type="email", disabled="true", value="{{user.email}}")
