@@ -3,10 +3,12 @@ bout.controller('friends', function($scope, DataManager, $http) {
   DataManager.observe('friends', function(data) {
     $scope.leaderboard = data;
   });
+  DataManager.methods.friends.get();
 
   DataManager.observe('pending_friends', function(data) {
     $scope.pending_friends = data;
   });
+  DataManager.methods.pending_friends.get();
 
   $scope.searchUsers = function($value) {
     return $http.get('/api/users/search?query=' + $value).then(function(data) {

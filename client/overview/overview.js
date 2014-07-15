@@ -6,6 +6,7 @@ bout.controller('overview', function($scope, DataManager) {
       return day;
     });
   });
+  DataManager.methods.activity.get();
 
   DataManager.observe('me', function(data) {
     $scope.user = data;
