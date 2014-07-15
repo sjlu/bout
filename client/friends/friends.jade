@@ -49,13 +49,12 @@ div.section-body
       table.table.table-striped
         tr(ng-repeat="friend in pending_friends")
           td.text-center
+              button.btn.btn-primary(ng-show="!friend.made", ng-click="acceptFriendRequest(friend)")
+                | Accept
+              span(ng-show="friend.made")
+                i.fa.fa-clock-o.fa-color-warning.fa-size-lg
+          td
             div
               div.gravatar
                 img(src="{{friend.gravatar}}")
                 | &nbsp;&nbsp;{{friend.username}}
-          td.text-center
-              button.btn.btn-primary(ng-show="!friend.made", ng-click="acceptFriendRequest(friend)")
-                | Accept
-              span(ng-show="friend.made")
-                em
-                  | Awaiting friend to accept...
