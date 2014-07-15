@@ -14,3 +14,5 @@ html
   body
     block body
     block scripts
+    if (process.env.ENV === "development")
+      script(src="http://localhost:35729/livereload.js")
