@@ -55,3 +55,5 @@ div.section-body
           td.text-center
               button.btn.btn-primary(ng-show="!friend.made", ng-click="acceptFriendRequest(friend)")
                 | Accept
+              span(ng-show="friend.made")
+                | Pending
