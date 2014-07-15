@@ -43,6 +43,7 @@ div.section-body
         typeahead="user for user in searchUsers($viewValue)",
         typeahead-editable="false",
         typeahead-on-select="typeaheadSelected($item, $model, $label)"
+        typeahead-template-url="friendTypeahead.tmpl"
       )
       p
       table.table.table-striped

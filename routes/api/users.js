@@ -15,6 +15,7 @@ router.get('/search', function(req, res, next) {
       return {
         score: user.score,
         username: user.obj.username,
+        gravatar: user.obj.gravatar,
         _id: user.obj.id
       }
     });
