@@ -56,4 +56,5 @@ div.section-body
               button.btn.btn-primary(ng-show="!friend.made", ng-click="acceptFriendRequest(friend)")
                 | Accept
               span(ng-show="friend.made")
-                | Pending
+                em
+                  | Awaiting friend to accept...
