@@ -9,7 +9,9 @@ router.get('/', middlewares.redirectIfLoggedIn, function(req, res) {
 });
 
 router.post('/', function(req, res, next) {
-  auth.authenticate(req.body.username, req.body.password, function(err, uid) {
+  var username = req.body.username.toLowerCase();
+
+  auth.authenticate(username, req.body.password, function(err, uid) {
     if (!uid) {
       req.flash('error', 'Unknown username and password combination.');
       return res.redirect('/login');
@@ -22,7 +24,9 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/token', function(req, res, next) {
-  auth.authenticate(req.body.username, req.body.password, function(err, uid) {
+  var username = req.body.username.toLowerCase();
+
+  auth.authenticate(username, req.body.password, function(err, uid) {
     if (err) return next(err);
     if (!uid) {
       res.json({
