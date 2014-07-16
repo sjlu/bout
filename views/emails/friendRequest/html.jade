@@ -1,0 +1,17 @@
+extends ../base
+
+block body
+  div.container
+    div.row
+      h4
+        | Hey {{user.username}},
+      p
+        | {{requester.username}} wants to be friends with you on Bout!
+      p
+        a(href=host + "/#/friends").btn.btn-primary.btn-lg
+          | Click here to view the request
+      p
+        | Or click this link instead:
+        br
+        a(href=host + "/#/friends")
+          =host + "/#/friends"
