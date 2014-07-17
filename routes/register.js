@@ -3,6 +3,8 @@ var router = express.Router();
 var models = require('../models');
 var validator = require('validator');
 var middlewares = require('../middlewares');
+var slack = require('../lib/slack');
+var async = require('async');
 
 /* GET home page. */
 router.get('/', middlewares.redirectIfLoggedIn, function(req, res) {
@@ -39,12 +41,18 @@ router.post('/', function(req, res, next) {
     password: password
   });
 
-  user.save(function(err, user) {
+  async.parallel({
+    user: function(cb) {
+      user.save(cb);
+    },
+    log: function(cb) {
+      console.log('new user:', user._id, user.email);
+      slack.create("A new user has registered. (" + user.username + ", " + user.email + ")", cb);
+    }
+  }, function(err, data) {
     if (err) return next(err);
 
-    console.log('new user:', user._id, user.email);
-
-    req.session.uid = user._id;
+    req.session.uid = data.user._id;
     res.redirect('/');
   });
 });
