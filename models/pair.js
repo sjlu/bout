@@ -89,7 +89,10 @@ Pair.statics.createPair = function(user, uid, cb) {
     self({
       uid1: user._id,
       uid2: uid
-    }).save(cb);
+    }).save(function(err, pair) {
+      if (err) return cb(err);
+      cb(null, pair);
+    });
   })
 
 }

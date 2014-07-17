@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../../models');
-var friends = require('../../lib/friends')
+var friends = require('../../lib/friends');
 var async = require('async');
+var email = require('../../lib/email');
 
 router.get('/', function(req, res, next) {
   friends.friendsForUser(req.user, function(err, users) {
@@ -25,7 +26,10 @@ router.post('/', function(req, res, next) {
 
   models.Pair.createPair(req.user, req.body.uid, function(err, pair) {
     if (err) return next(err);
-    res.json(pair);
+    email.create('friendRequest', {pid:pair._id}, function(err) {
+      if (err) return next(err);
+      res.json(pair);
+    });
   });
 });
 
