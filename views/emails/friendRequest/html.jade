@@ -4,9 +4,9 @@ block body
   div.container
     div.row
       h4
-        | Hey {{to.username}},
+        | Hey #{to.username},
       p
-        | {{from.username}} wants to be friends with you on bout!
+        | #{from.username} wants to be friends with you on bout!
       p
         a(href=host + "/#/friends").btn.btn-primary.btn-lg
           | Click here to view the request
