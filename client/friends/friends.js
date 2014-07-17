@@ -1,9 +1,8 @@
 bout.controller('friends', function($scope, DataManager, $http) {
 
-  DataManager.observe('friends', function(data) {
-    $scope.leaderboard = data;
+  $http.get('/api/leaderboards?days_back=7').then(function(data) {
+    $scope.leaderboard = data.data;
   });
-  DataManager.methods.friends.get();
 
   DataManager.observe('pending_friends', function(data) {
     $scope.pending_friends = data;
