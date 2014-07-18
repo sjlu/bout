@@ -10,7 +10,7 @@ div.section-body
           span
             | 1.
           |  Add your fitness tracker
-    div.col-sm-4
+    div.col-sm-6
       div.panel.panel-primary.text-center.stats
         div.panel-heading
           | Today
@@ -23,6 +23,26 @@ div.section-body
               td
                 h3
                   | {{stats.day.steps | number}}
+        div.panel-footer
+          table
+            tr
+              td
+                | Rank
+              td
+                | Steps
+    div.col-sm-6
+      div.panel.panel-primary.text-center.stats
+        div.panel-heading
+          | This Week
+        div.panel-body
+          table
+            tr
+              td
+                h1
+                  | \#{{stats.week.pos | number}}
+              td
+                h3
+                  | {{stats.week.steps | number}}
         div.panel-footer
           table
             tr

@@ -16,6 +16,21 @@ router.put('/', function(req, res, next) {
   });
 });
 
+var userStats = function(user, q, cb) {
+  leaderboards(user, q, function(err, data) {
+    if (err) return cb(err);
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].id == user.id) {
+        return cb(null, {
+          pos: i+1,
+          steps: data[i].steps
+        });
+      }
+    }
+    cb();
+  });
+}
+
 router.get('/stats', function(req, res, next) {
   var leaderboardQuery = {};
   if (req.query.start_on) {
@@ -26,19 +41,12 @@ router.get('/stats', function(req, res, next) {
     day: function(cb) {
       var q = _.clone(leaderboardQuery);
       q.days_back = 1;
-      leaderboards(req.user, q, function(err, data) {
-        if (err) return cb(err);
-        for (var i = 0; i < data.length; i++) {
-          var user = data[i];
-          if (data[i].id == req.user.id) {
-            return cb(null, {
-              pos: i+1,
-              steps: user.steps
-            });
-          }
-        }
-        cb();
-      });
+      userStats(req.user, q, cb);
+    },
+    week: function(cb) {
+      var q = _.clone(leaderboardQuery);
+      q.days_back = 7;
+      userStats(req.user, q, cb);
     }
   }, function(err, data) {
     if (err) return next(err);
