@@ -106,7 +106,7 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
       },
       friends: {
         get: function() {
-          request("GET", "/api/leaderboards", {}, function(err, data) {
+          request("GET", "/api/friends", {}, function(err, data) {
             update('friends', data);
           });
         }

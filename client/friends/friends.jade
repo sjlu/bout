@@ -4,34 +4,6 @@ div.section-body
   div.section-column.row
     div.col-sm-4
       div.section-column-header
-        | Leaderboard
-        div.small
-          | This is where you stand against your friends.
-    div.col-sm-8
-      table.table.table-bordered
-        thead
-          th
-          th
-            | Name
-          th
-            | Steps
-        tbody
-          tr(ng-repeat="(i,friend) in leaderboard", ng-class="{info: friend._id === user._id}")
-            td
-              strong
-                | {{i+1}}
-            td
-              div
-                div.gravatar
-                  img(src="{{friend.gravatar}}")
-                  | &nbsp;&nbsp;{{friend.username}}
-                  span.bold(ng-show="friend._id === user._id")
-                    | &nbsp;(you)
-            td
-              | {{friend.steps | number}}
-  div.section-column.row
-    div.col-sm-4
-      div.section-column-header
         | Make Friends
         div.small
           | Search your buddies up and accept your buddy's friend request.
@@ -39,7 +11,7 @@ div.section-body
       input.input-lg.form-control(
         type="text",
         ng-model="addFriend",
-        placeholder="Your friend's username",
+        placeholder="Type your friend's username to add them",
         typeahead="user for user in searchUsers($viewValue)",
         typeahead-editable="false",
         typeahead-on-select="typeaheadSelected($item, $model, $label)"
@@ -54,9 +26,19 @@ div.section-body
               button.btn.btn-primary(ng-show="!friend.made", ng-click="acceptFriendRequest(friend)")
                 | Accept
               span(ng-show="friend.made")
-                i.fa.fa-clock-o.fa-color-warning.fa-size-lg
+                i.fa.fa-clock-o.fa-color-warning.fa-size-lg(tooltip="Waiting for your friend to accept")
           td
             div
               div.gravatar
                 img(src="{{friend.gravatar}}")
                 | &nbsp;&nbsp;{{friend.username}}
+        tr(ng-repeat="friend in friends")
+          td.text-center
+            span
+              i.fa.fa-check.fa-color-success.fa-size-lg(tooltip="You're friends!")
+          td
+            div
+              div.gravatar
+                img(src="{{friend.gravatar}}")
+                | &nbsp;&nbsp;{{friend.username}}
+
