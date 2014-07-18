@@ -117,6 +117,13 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
             update('pending_friends', data);
           });
         }
+      },
+      stats: {
+        get: function() {
+          request("GET", "/api/me/stats?start_on=" + moment().format('YYYYMMDD'), {}, function(err, data) {
+            update('stats', data);
+          });
+        }
       }
 
     };

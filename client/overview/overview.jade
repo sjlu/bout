@@ -10,11 +10,23 @@ div.section-body
           span
             | 1.
           |  Add your fitness tracker
-    div.col-sm-2.text-center(ng-repeat="(i, a) in activity", ng-show="user.has_tracker")
-      div.panel(ng-class="{'panel-default': i != 0, 'panel-primary': i == 0}")
+    div.col-sm-4
+      div.panel.panel-primary.text-center.stats
+        div.panel-heading
+          | Today
         div.panel-body
-          h2
-           | {{a.steps | number}}
-        div.panel-footer(ng-class="{'panel-default': i != 0, 'panel-primary': i == 0}")
-          span.small
-            | {{a.displayDate}}
+          table
+            tr
+              td
+                h1
+                  | \#{{stats.day.pos | number}}
+              td
+                h3
+                  | {{stats.day.steps | number}}
+        div.panel-footer
+          table
+            tr
+              td
+                | Rank
+              td
+                | Steps
