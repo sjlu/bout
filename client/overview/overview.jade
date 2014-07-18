@@ -19,7 +19,9 @@ div.section-body
             tr
               td
                 h1
-                  | \#{{stats.day.pos | number}}
+                  small
+                    | #
+                  | {{stats.day.pos | number}}
               td
                 h3
                   | {{stats.day.steps | number}}
@@ -39,7 +41,9 @@ div.section-body
             tr
               td
                 h1
-                  | \#{{stats.week.pos | number}}
+                  small
+                    | #
+                  | {{stats.week.pos | number}}
               td
                 h3
                   | {{stats.week.steps | number}}
