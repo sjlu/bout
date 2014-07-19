@@ -4,7 +4,8 @@ bout.config(['$routeProvider', function($routeProvider, $locationProvider) {
     '/': 'overview',
     '/account': 'account',
     '/connect': 'connect',
-    '/friends': 'friends'
+    '/friends': 'friends',
+    '/leaderboard': 'leaderboard'
   };
 
   for (var route in routes) {
