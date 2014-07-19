@@ -1,12 +1,12 @@
-bout.controller('leaderboard', function($scope, $http) {
+bout.controller('leaderboard', function($scope, $http, $route) {
 
   $scope.startOnMoment = moment();
-  $scope.timeBlockType = 'day';
+  $route.current.params.type = $route.current.params.type || 'day';
 
   $scope.getLeaderboard = function() {
     var url = '/api/leaderboards?';
     url += "start_on=" + $scope.startOnMoment.format('YYYYMMDD');
-    if ($scope.timeBlockType === 'day') {
+    if ($route.current.params.type === 'day') {
       url += "&days_back=1";
     } else if ($scope.timeBlockType === 'week') {
       url += "&days_back=7";

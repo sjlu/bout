@@ -10,7 +10,7 @@ div.section-body
           span
             | 1.
           |  Add your fitness tracker
-    div.col-sm-6
+    div.col-sm-6.cursor-pointer(ng-click="showLeaderboard('day')")
       div.panel.panel-primary.text-center.stats
         div.panel-heading
           | Today
@@ -32,7 +32,7 @@ div.section-body
                 | Rank
               td
                 | Steps
-    div.col-sm-6
+    div.col-sm-6.cursor-pointer(ng-click="showLeaderboard('week')")
       div.panel.panel-primary.text-center.stats
         div.panel-heading
           | Past 7 Days
