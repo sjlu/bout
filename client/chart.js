@@ -23,7 +23,7 @@ Chart.defaults.global = {
   scaleStartValue: null,
 
   // String - Colour of the scale line
-  scaleLineColor: "#fff",
+  scaleLineColor: "#666",
 
   // Number - Pixel width of the scale line
   scaleLineWidth: 1,
