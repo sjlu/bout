@@ -159,7 +159,11 @@ User.virtual('has_jawbone').get(function() {
 });
 
 User.virtual('has_tracker').get(function() {
-  return this.jawbone_token || this.fitbit_id || this.withings_id;
+  if (this.jawbone_token || this.fitbit_id || this.withings_id) {
+    return true;
+  }
+
+  return false;
 });
 
 User.virtual('name').get(function() {
