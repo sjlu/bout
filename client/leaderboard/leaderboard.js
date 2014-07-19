@@ -20,8 +20,8 @@ bout.controller('leaderboard', function($scope, $http) {
   var chartCanvas = document.getElementById('chart').getContext('2d');
   var chart = new Chart(chartCanvas);
   opts = {
-    scaleGridLineColor: '#fff',
-    scaleGridLineWidth: 0,
+    scaleGridLineColor: '#666',
+    scaleGridLineWidth: 1,
     barShowStroke: false,
     barStrokeWidth: 0
   };
