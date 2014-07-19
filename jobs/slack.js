@@ -1,3 +1,5 @@
+var slack = require('../lib/slack');
+
 module.exports = function(job, done) {
   var data = job.data;
   var text = data.text;
