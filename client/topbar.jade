@@ -1,7 +1,7 @@
 div.row
   div.col-xs-6
     a(href="/")
-      img.logo.logo-xs(ng-src="/images/logo_black.png")
+      img.logo.logo-xs(src="/images/logo_black.png")
   div.col-xs-6.text-right
     ul.menu
       li.hidden-xs
@@ -12,7 +12,7 @@ div.row
       li
         div.gravatar(dropdown).clearfix
           div.dropdown-toggle
-            img(src="{{user.gravatar}}")
+            img(ng-src="{{user.gravatar}}")
             i.fa.fa-caret-down
           ul.dropdown-menu
             li.visible-xs

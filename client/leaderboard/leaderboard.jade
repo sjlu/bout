@@ -20,7 +20,7 @@ div.section-body
           td
             div
               div.gravatar
-                img(src="{{friend.gravatar}}")
+                img(ng-src="{{friend.gravatar}}")
                 | &nbsp;&nbsp;{{friend.username}}
                 span.bold(ng-show="friend._id === user._id")
                   | &nbsp;(you)
