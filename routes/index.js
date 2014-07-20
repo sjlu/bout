@@ -3,18 +3,31 @@ var router = express.Router();
 var middlewares = require('../middlewares');
 var models = require('../models');
 var validator = require('validator');
+var _ = require('lodash');
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  if (req.user) {
+    return res.redirect('/overview');
+  }
+
+  return res.render('index');
+});
 
 var renderClient = function(req, res, next) {
   return res.render('client');
 }
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  if (req.user) {
-    return renderClient(req, res, next);
-  }
-
-  return res.render('index');
+_.each([
+  'overview',
+  'account',
+  'devices',
+  'friends',
+  'leaderboard'
+], function(route) {
+  router.get('/' + route + '*', middlewares.redirectIfNoLogin, function(req, res, next) {
+    return res.render('client');
+  });
 });
 
 router.post('/', function(req, res, next) {

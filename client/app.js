@@ -1,9 +1,11 @@
-bout.config(['$routeProvider', function($routeProvider, $locationProvider) {
+bout.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
+  $locationProvider.html5Mode(true);
 
   var routes = {
-    '/': 'overview',
+    '/overview': 'overview',
     '/account': 'account',
-    '/connect': 'connect',
+    '/devices': 'devices',
     '/friends': 'friends',
     '/leaderboard': 'leaderboard'
   };
@@ -17,7 +19,7 @@ bout.config(['$routeProvider', function($routeProvider, $locationProvider) {
   }
 
   $routeProvider.otherwise({
-    redirectTo: '/'
+    redirectTo: '/overview'
   });
 
 }]);

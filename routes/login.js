@@ -18,9 +18,12 @@ router.post('/', function(req, res, next) {
     }
 
     req.session.uid = uid;
-    return res.redirect('/');
+    var url = '/';
+    if (req.query.next) {
+      url = req.query.next;
+    }
+    return res.redirect(url);
   });
-
 });
 
 router.post('/token', function(req, res, next) {

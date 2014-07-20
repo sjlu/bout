@@ -30,7 +30,7 @@ div.section-body
           td
             div
               div.gravatar
-                img(src="{{friend.gravatar}}")
+                img(ng-src="{{friend.gravatar}}")
                 | &nbsp;&nbsp;{{friend.username}}
         tr(ng-repeat="friend in friends")
           td.text-center
@@ -39,6 +39,6 @@ div.section-body
           td
             div
               div.gravatar
-                img(src="{{friend.gravatar}}")
+                img(ng-src="{{friend.gravatar}}")
                 | &nbsp;&nbsp;{{friend.username}}
 

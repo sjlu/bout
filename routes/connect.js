@@ -10,7 +10,7 @@ var fitbit = require('../lib/fitbit');
 router.use(middlewares.requiresLogin);
 
 router.get('/', function(req, res, next) {
-  res.redirect('/#/connect');
+  res.redirect('/devices');
 });
 
 router.get('/withings', function(req, res, next) {
