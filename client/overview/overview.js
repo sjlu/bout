@@ -26,13 +26,13 @@ bout.controller('overview', function($scope, DataManager, $location, $http) {
     if (!$scope.track) return;
     var data = {
       labels: [
+        'Sunday',
         'Monday',
         'Tuesday',
         'Wednesday',
         'Thursday',
         'Friday',
         'Saturday',
-        'Sunday'
       ],
       datasets: [{
         label: "This Week",
