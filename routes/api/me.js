@@ -4,6 +4,8 @@ var leaderboards = require('../../lib/leaderboards');
 var async = require('async');
 var moment = require('moment');
 var _ = require('lodash');
+var activities = require('../../lib/activities');
+var date = require('../../lib/date');
 
 router.get('/', function(req, res, next) {
   res.json(req.user);
@@ -53,6 +55,36 @@ router.get('/stats', function(req, res, next) {
     if (err) return next(err);
     res.json(data);
   });
+});
+
+router.get('/track', function(req, res, next) {
+  var start = req.query.start_on || date.getDate();
+
+  async.parallel({
+    this_week: function(cb) {
+      activities(req.user, {
+        start_on: moment(start, 'YYYYMMDD').add(1, 'week').startOf('week').format('YYYYMMDD'),
+        days_back: 7
+      }, cb);
+    },
+    last_week: function(cb) {
+      activities(req.user, {
+        start_on: moment(start, 'YYYYMMDD').startOf('week').format('YYYYMMDD'),
+        days_back: 7
+      }, cb);
+    }
+  }, function(err, data) {
+    var oneWeekAgo = moment(start, 'YYYYMMDD').subtract(1, 'week').format('YYYYMMDD');
+
+    var todayTotalSteps = _.find(data.this_week, {date:''+start});
+    var oneWeekAgoTotalSteps = _.find(data.last_week, {date:oneWeekAgo});
+
+    data.on_track = todayTotalSteps.total - oneWeekAgoTotalSteps.total;
+
+    if (err) return next(err);
+    res.json(data);
+  });
+
 });
 
 module.exports = router;
