@@ -23,7 +23,8 @@ var userStats = function(user, q, cb) {
       if (data[i].id == user.id) {
         return cb(null, {
           pos: i+1,
-          steps: data[i].steps
+          steps: data[i].steps,
+          total: data.length
         });
       }
     }
