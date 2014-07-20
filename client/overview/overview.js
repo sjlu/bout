@@ -8,6 +8,11 @@ bout.controller('overview', function($scope, DataManager, $location) {
     $scope.user = data;
   });
 
+  DataManager.observe('friends', function(data) {
+    $scope.friends = data;
+  });
+  DataManager.methods.friends.get();
+
   $scope.showLeaderboard = function(type) {
     $location.path('/leaderboard');
     $location.search('type', type);

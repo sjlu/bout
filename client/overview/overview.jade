@@ -1,15 +1,7 @@
 div.section-header
   | Your Activity
 div.section-body
-  div.section-column.row
-    div.nextsteps(ng-show="!user.has_tracker")
-      div.nextsteps-header
-        | Next Steps
-      a(href="#/connect")
-        div.nextsteps-step
-          span
-            | 1.
-          |  Add your fitness tracker
+  div.section-column.row(ng-show="user.has_tracker && friends.length" ng-cloak)
     div.col-sm-6.cursor-pointer(ng-click="showLeaderboard('day')")
       div.panel.panel-primary.text-center.stats
         div.panel-heading
@@ -58,3 +50,17 @@ div.section-body
                 | Rank
               td
                 | Steps
+  div.section-column.row
+    div.nextsteps(ng-show="!user.has_tracker || !friends.length" ng-cloak)
+      div.nextsteps-header
+        | Next Steps
+      a(href="#/connect" ng-class="{strikethrough:user.has_tracker}")
+        div.nextsteps-step
+          span
+            | 1.
+          | Add your fitness tracker
+      a(href="#/friends" ng-class="{strikethrough:friends.length}")
+        div.nextsteps-step
+          span
+            | 2.
+          | Make a friend
