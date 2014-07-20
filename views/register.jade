@@ -8,9 +8,9 @@ block body
         include ./flash
         form(method="POST")
           div.auth-input.auth-separator
-            input.form-control(type="email", name="email", placeholder="Email", autocapitalize="off", autocorrect="off")
+            input.form-control(type="email", name="email", placeholder="Email", autocapitalize="off", autocorrect="off", value=email)
           div.auth-input.auth-separator
-            input.form-control(type="text", name="username", placeholder="Username", autocapitalize="off", autocorrect="off")
+            input.form-control(type="text", name="username", placeholder="Username", autocapitalize="off", autocorrect="off", value=username)
           div.auth-input.auth-separator
             input.form-control(type="password", name="password", placeholder="Password")
           div.auth-input

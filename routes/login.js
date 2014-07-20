@@ -5,7 +5,9 @@ var middlewares = require('../middlewares');
 var auth = require('../lib/auth');
 
 router.get('/', middlewares.redirectIfLoggedIn, function(req, res) {
-  res.render('login');
+  res.render('login', {
+    username: req.query.username
+  });
 });
 
 router.post('/', function(req, res, next) {
@@ -14,7 +16,7 @@ router.post('/', function(req, res, next) {
   auth.authenticate(username, req.body.password, function(err, uid) {
     if (!uid) {
       req.flash('error', 'Unknown username and password combination.');
-      return res.redirect('/login');
+      return res.redirect('/login?username=' + username);
     }
 
     req.session.uid = uid;

@@ -8,31 +8,40 @@ var async = require('async');
 
 /* GET home page. */
 router.get('/', middlewares.redirectIfLoggedIn, function(req, res) {
-  res.render('register');
+  res.render('register', {
+    username: req.query.username,
+    email: req.query.email
+  });
 });
 
 router.post('/', function(req, res, next) {
+  var error = false;
+
   var email = req.body.email;
   if (!validator.isEmail(email)) {
     req.flash('error', 'Not a valid email address.');
-    return res.redirect('/register');
+    error = true;
   };
 
   var username = req.body.username;
   if (!username.length) {
     req.flash('error', 'A valid username is required.');
-    return res.redirect('/register');
+    error = true;
   }
 
   var password = req.body.password;
   if (password.length < 7) {
     req.flash('error', 'Password must be longer than 7 characters.');
-    return res.redirect('/register');
+    error = true;
   }
 
   if (!validator.equals(req.body.password, req.body.confirm_password)) {
     req.flash('error', 'Passwords are not the same.');
-    return res.redirect('/register');
+    error = true;
+  }
+
+  if (error) {
+    return res.redirect('/register?email='+email+"&username="+username);
   }
 
   var user = new models.User({
