@@ -2,14 +2,14 @@ div.section-header
   | Your Activity
 div.section-body
   br
-  div.row.track
+  div.row.track(ng-show="user.has_tracker" ng-cloak)
     div.col-sm-12.text-center
       span.track-status(ng-class='{on:on_track}')
         span(ng-show="on_track" tooltip="You are currently on track on beating your last week.")
           | On Track
         span(ng-show="!on_track" tooltip="You are currently off track on beating your last week.")
           | Off Track
-  div.row
+  div.row(ng-show="user.has_tracker" ng-cloak)
     canvas.hidden-xs.hidden-sm#chart
   div.section-column.row(ng-show="user.has_tracker && friends.length" ng-cloak)
     div.col-sm-6.cursor-pointer(ng-click="showLeaderboard('day')")
