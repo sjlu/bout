@@ -9,5 +9,6 @@ router.use('/activity', require('./activity'));
 router.use('/friends', require('./friends'));
 router.use('/leaderboards', require('./leaderboards'));
 router.use('/users', require('./users'));
+router.use('/foods', require('./foods'));
 
 module.exports = router;
