@@ -42,6 +42,9 @@ var Food = new mongoose.Schema({
     required: true,
     enum: ["ounce", "pound", "gram"],
     default: "pound"
+  },
+  notes: {
+    type: String
   }
 });
 

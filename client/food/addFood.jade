@@ -1,0 +1,49 @@
+div.modal-header
+  h4.modal-title
+    | New Food
+div.modal-body
+  form
+    div.form-group
+      label
+        | Name
+      input.form-control(type="text" ng-model="food.name" placeholder="Chicken, Steak, etc." required="true")
+    div.row
+      div.col-md-6
+        div.form-group
+          label
+            | Serving Size
+          div.row
+            div.col-md-4
+              input.form-control(type="text" value="1" ng-model="food.measure")
+            div.col-md-8
+              select.form-control(ng-model="food.measure_type")
+                option(value="pound")
+                  | pounds
+                option(value="ounce")
+                  | ounces
+                option(vlaue="gram")
+                  | grams
+      div.col-md-6
+        div.form-group
+          label
+            | Calories
+          input.form-control(type="text" ng-model="food.calories")
+    div.row
+      div.col-md-4
+        div.form-group
+          label
+            | Fat
+          input.form-control(type="text" ng-model="food.fat" placeholder="in grams")
+      div.col-md-4
+        div.form-group
+          label
+            | Carbs
+          input.form-control(type="text" ng-model="food.carbs" placeholder="in grams")
+      div.col-md-4
+        div.form-group
+          label
+            | Protein
+          input.form-control(type="text" ng-model="food.protein" placeholder="in grams")
+div.modal-footer
+  button.btn.btn-primary(type="submit" ng-click="create()")
+    | Create

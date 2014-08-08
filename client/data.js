@@ -130,6 +130,14 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
           request("GET", "/api/foods", {}, function(err, data) {
             update("foods", data);
           });
+        },
+        create: function(food, cb) {
+          request("POST", "/api/foods", food, function(err) {
+            if ("function" === typeof cb) {
+              cb();
+            }
+            methods.foods.get();
+          });
         }
       }
 
