@@ -32,12 +32,25 @@ var Food = new mongoose.Schema({
     required: true,
     default: 0
   },
-  size: {
+  measure: {
+    type: Number,
+    required: true,
+    default: 1
+  },
+  measure_type: {
     type: String,
     required: true,
-    enum: ["cups", "ounces", "pounds", "servings"],
-    default: "servings"
+    enum: ["ounce", "pound", "gram"],
+    default: "pound"
   }
+});
+
+Food.virtual('serving_size').get(function() {
+  var retVal = this.measure + " " + this.measure_type;
+  if (this.measure !== 1) {
+    retVal += "s";
+  }
+  return retVal;
 });
 
 Food.statics.getFoodsForUser = function(user, cb) {
@@ -53,7 +66,8 @@ Food.statics.createFoodForUser = function(user, fields, cb) {
     "fats",
     "carbs",
     "protein",
-    "size"
+    "measure",
+    "measure_type"
   ]);
 
   // assign it to a user id
@@ -62,5 +76,10 @@ Food.statics.createFoodForUser = function(user, fields, cb) {
   var food = new this(fields);
   food.save(cb);
 }
+
+Food.method('toJSON', function() {
+  var food = this.toObject({virtuals: true});
+  return food;
+});
 
 module.exports = mongoose.model('Food', Food);

@@ -124,6 +124,13 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
             update('stats', data);
           });
         }
+      },
+      foods: {
+        get: function() {
+          request("GET", "/api/foods", {}, function(err, data) {
+            update("foods", data);
+          });
+        }
       }
 
     };

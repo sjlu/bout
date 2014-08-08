@@ -23,7 +23,8 @@ _.each([
   'account',
   'devices',
   'friends',
-  'leaderboard'
+  'leaderboard',
+  'foods'
 ], function(route) {
   router.get('/' + route + '*', middlewares.redirectIfNoLogin, function(req, res, next) {
     return res.render('client');
