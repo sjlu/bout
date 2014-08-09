@@ -6,8 +6,7 @@
     "start": "node ./bin/www",
     "worker": "node ./bin/worker",
     "dev": "export ENV=development; node-dev ./bin/www",
-    "dev-worker": "node-dev ./bin/worker",
-    "postinstall": "grunt deploy"
+    "dev-worker": "node-dev ./bin/worker"
   },
   "dependencies": {
     "MD5": "^1.2.1",
