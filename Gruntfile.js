@@ -1,4 +1,5 @@
 var path = require('path');
+var config = require('./lib/config');
 
 module.exports = function (grunt) {
   grunt.initConfig({
@@ -84,6 +85,30 @@ module.exports = function (grunt) {
     },
 
     /**
+     * S3 Deployments
+     */
+    s3: {
+      options: {
+        key: config.AWS_KEY,
+        secret: config.AWS_SECRET,
+        bucket: config.AWS_CDN_BUCKET,
+        access: 'public-read'
+      },
+      deploy: {
+        upload: [{
+          src: "public/bower_components/**/*",
+          dest: config.GITREV + "/bower_components/",
+        }, {
+          src: "public/build/**/*",
+          dest: config.GITREV + "/build/",
+        }, {
+          src: "public/images/**/*",
+          dest: config.GITREV + "/images/",
+        }]
+      }
+    },
+
+    /**
      * Watch
      * Watch the filesystem and auto-run these commands
      */
@@ -123,5 +148,5 @@ module.exports = function (grunt) {
    * Tasks
    */
   grunt.registerTask('default', ['less:default', 'html2js:default', 'concat:default']);
-  grunt.registerTask('deploy', ['less:deploy', 'html2js:deploy', 'concat:default', 'uglify:deploy']);
+  grunt.registerTask('deploy', ['less:deploy', 'html2js:deploy', 'concat:default', 'uglify:deploy', 's3:deploy']);
 };
