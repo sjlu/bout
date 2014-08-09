@@ -139,6 +139,19 @@ bout.service('DataManager', ['$rootScope', '$http', function($rootScope, $http) 
             methods.foods.get();
           });
         }
+      },
+      food_entries: {
+        get: function() {
+
+        },
+        create: function(entry, cb) {
+          request("POST", "/api/me/food/entries", entry, function(err) {
+            if ("function" === typeof cb) {
+              cb();
+            }
+            methods.food_entries.get();
+          })
+        }
       }
 
     };

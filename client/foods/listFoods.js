@@ -11,4 +11,16 @@ bout.controller('listFoods', function($scope, DataManager, $modal) {
     });
   }
 
+  $scope.openAddEntryModal = function(food) {
+    $modal.open({
+      templateUrl: 'addFoodEntry.tmpl',
+      controller: 'addFoodEntry',
+      resolve: {
+        food: function() {
+          return food;
+        }
+      }
+    })
+  }
+
 });
