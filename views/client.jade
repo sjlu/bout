@@ -6,14 +6,14 @@ block body
     div(ng-view)
 
 block scripts
-  script(src="/bower_components/angular/angular.min.js")
-  script(src="/bower_components/angular-route/angular-route.min.js")
-  script(src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js")
-  script(src="/bower_components/moment/min/moment.min.js")
-  script(src="/bower_components/angular-moment/angular-moment.min.js")
-  script(src="/bower_components/lodash/dist/lodash.min.js")
-  script(src="/bower_components/chartjs/Chart.min.js")
-  script(src="/build/client/templates.js")
+  script(src=asset("/bower_components/angular/angular.min.js"))
+  script(src=asset("/bower_components/angular-route/angular-route.min.js"))
+  script(src=asset("/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"))
+  script(src=asset("/bower_components/moment/min/moment.min.js"))
+  script(src=asset("/bower_components/angular-moment/angular-moment.min.js"))
+  script(src=asset("/bower_components/lodash/dist/lodash.min.js"))
+  script(src=asset("/bower_components/chartjs/Chart.min.js"))
+  script(src=asset("/build/client/templates.js"))
   script
     | window.bout = angular.module('bout', ['ngRoute', 'templates', 'ui.bootstrap', 'angularMoment']);
-  script(src="/build/client/app.js")
+  script(src=asset("/build/client/app.js"))

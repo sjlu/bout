@@ -11,6 +11,7 @@ var config = require('./lib/config');
 var RedisStore = require('connect-redis')(session);
 var redis = require('./lib/redis');
 var middlewares = require('./middlewares');
+var config = require('./lib/config');
 
 var app = express();
 
@@ -35,6 +36,12 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(middlewares.getUserFromAuth);
+app.locals.asset = function(uri) {
+  // if (app.get('env') === 'production') {
+    return path.join(config.AWS_CF_URL, config.GITREV, uri);
+  // }
+  return uri;
+}
 
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));

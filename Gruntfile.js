@@ -98,12 +98,15 @@ module.exports = function (grunt) {
         upload: [{
           src: "public/bower_components/**/*",
           dest: config.GITREV + "/bower_components/",
+          rel: "public/bower_components"
         }, {
           src: "public/build/**/*",
           dest: config.GITREV + "/build/",
+          rel: "public/build"
         }, {
           src: "public/images/**/*",
           dest: config.GITREV + "/images/",
+          rel: "public/images"
         }]
       }
     },
