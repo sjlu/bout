@@ -8,6 +8,9 @@
     "dev": "export ENV=development; node-dev ./bin/www",
     "dev-worker": "node-dev ./bin/worker"
   },
+  "engines": {
+    "node": "0.10.29"
+  },
   "dependencies": {
     "MD5": "^1.2.1",
     "URIjs": "^1.13.2",
