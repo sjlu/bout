@@ -6,6 +6,7 @@ var moment = require('moment');
 var _ = require('lodash');
 var activities = require('../../lib/activities');
 var date = require('../../lib/date');
+var models = require('../../models');
 
 router.get('/', function(req, res, next) {
   res.json(req.user);
@@ -85,6 +86,20 @@ router.get('/track', function(req, res, next) {
     res.json(data);
   });
 
+});
+
+router.get('/food/entries', function(req, res, next) {
+  models.FoodEntry.getEntriesForUser(req.user, function(err, entries) {
+    if (err) return next(err);
+    res.json(entries);
+  });
+});
+
+router.post('/food/entries', function(req, res, next) {
+  models.FoodEntry.createEntryForUser(req.user, req.body, function(err, entry) {
+    if (err) return next(err);
+    res.json(entry);
+  });
 });
 
 module.exports = router;

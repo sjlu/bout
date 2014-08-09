@@ -14,14 +14,14 @@ div.modal-body
             | Serving Size
           div.row
             div.col-md-4
-              input.form-control(type="text" value="1" ng-model="food.measure")
+              input.form-control(type="text" value="1" ng-model="food.serving_size")
             div.col-md-8
-              select.form-control(ng-model="food.measure_type")
-                option(value="pound")
+              select.form-control(ng-model="food.serving_type")
+                option(value="lb")
                   | pounds
-                option(value="ounce")
+                option(value="oz")
                   | ounces
-                option(vlaue="gram")
+                option(value="g")
                   | grams
       div.col-md-6
         div.form-group
@@ -33,7 +33,7 @@ div.modal-body
         div.form-group
           label
             | Fat
-          input.form-control(type="text" ng-model="food.fat" placeholder="in grams")
+          input.form-control(type="text" ng-model="food.fats" placeholder="in grams")
       div.col-md-4
         div.form-group
           label
