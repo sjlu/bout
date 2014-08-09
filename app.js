@@ -12,6 +12,7 @@ var RedisStore = require('connect-redis')(session);
 var redis = require('./lib/redis');
 var middlewares = require('./middlewares');
 var config = require('./lib/config');
+var urljoin = require('url-join');
 
 var app = express();
 
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(middlewares.getUserFromAuth);
 app.locals.asset = function(uri) {
   if (config.ENV === 'production') {
-    return path.join(config.AWS_CF_URL, config.GITREV, uri);
+    return urljoin(config.AWS_CF_URL, config.GITREV, uri);
   }
   return uri;
 }
