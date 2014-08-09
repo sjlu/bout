@@ -4,12 +4,23 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     /**
-     * JS concatenation
+     * JS concatenation & minification
      */
     concat: {
-      client: {
+      default: {
         src: ['client/**/*.js'],
         dest: 'public/build/client/app.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        mangle: false
+      },
+      deploy: {
+        files: {
+          'public/build/client/app.js': 'public/build/client/app.js'
+        }
       }
     },
 
@@ -29,6 +40,14 @@ module.exports = function (grunt) {
         files: {
           "public/build/styles.css": "public/stylesheets/style.less"
         }
+      },
+      deploy: {
+        options: {
+          cleancss: true
+        },
+        files: {
+          "public/build/styles.css": "public/stylesheets/style.less"
+        }
       }
     },
 
@@ -42,7 +61,23 @@ module.exports = function (grunt) {
         },
         module: 'templates'
       },
-      client: {
+      default: {
+        src: ['client/**/*.jade'],
+        dest: 'public/build/client/templates.js'
+      },
+      deploy: {
+        options: {
+          htmlmin: {
+            collapseBooleanAttributes: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+            removeComments: true,
+            removeEmptyAttributes: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+          }
+        },
         src: ['client/**/*.jade'],
         dest: 'public/build/client/templates.js'
       }
@@ -60,15 +95,15 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['public/stylesheets/**/*.less'],
-        tasks: ['less']
+        tasks: ['less:default']
       },
       js: {
         files: ['client/**/*.js'],
-        tasks: ['concat']
+        tasks: ['concat:default']
       },
       html: {
         files: ['client/**/*.jade'],
-        tasks: ['html2js']
+        tasks: ['html2js:default']
       }
     }
 
@@ -87,5 +122,6 @@ module.exports = function (grunt) {
   /*
    * Tasks
    */
-  grunt.registerTask('default', ['less', 'html2js', 'concat']);
+  grunt.registerTask('default', ['less:default', 'html2js:default', 'concat:default']);
+  grunt.registerTask('deploy', ['less:deploy', 'html2js:deploy', 'concat:default', 'uglify:deploy']);
 };
