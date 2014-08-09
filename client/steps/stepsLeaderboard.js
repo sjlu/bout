@@ -1,4 +1,4 @@
-bout.controller('leaderboard', function($scope, $http, $route) {
+bout.controller('stepsLeaderboard', function($scope, $http, $route) {
 
   $scope.startOnMoment = moment();
   $route.current.params.type = $route.current.params.type || 'day';

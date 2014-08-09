@@ -5,19 +5,20 @@ div.row
   div.col-xs-6.text-right
     ul.menu
       li.hidden-xs
-        a(href="/friends")
-          | Friends
+        a(href="/foods")
+          | Food
       li.hidden-xs
         | &middot;
+      li.hidden-xs
+        a(href="/steps")
+          | Steps
+      li.hidden-xs
       li
         div.gravatar(dropdown).clearfix
           div.dropdown-toggle
             img(ng-src="{{user.gravatar}}")
             i.fa.fa-caret-down
           ul.dropdown-menu
-            li.visible-xs
-              a(href="/friends")
-                | Friends
             li
               a(href="/account")
                 div
@@ -28,8 +29,9 @@ div.row
               a(href="/devices")
                 div
                   | Devices
-                  div.small
-                    | Your Connected Devices
+            li
+              a(href="/friends")
+                | Friends
             li
               a(href="/logout" target="_self")
                 | Logout

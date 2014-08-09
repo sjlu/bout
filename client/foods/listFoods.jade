@@ -1,0 +1,49 @@
+div.section-header
+  | Foods
+div.section-body
+  div.section-column.row
+    div.col-sm-4
+      div.section-column-header
+        | Your Foods
+        div.small
+          | Add foods that you normally eat here.
+    div.col-sm-8
+      div.row
+        div.col-md-12
+          table.table
+            thead
+              th
+                | Food
+              th
+                | Servings
+              th
+                | Calories
+              th
+                | Fats
+              th
+                | Carbs
+              th
+                | Protein
+            tbody
+              tr(ng-repeat="f in foods")
+                td
+                  | {{f.name}}
+                td
+                  small
+                    | {{f.serving}}
+                td
+                  small
+                    | {{f.calories}}
+                td
+                  small
+                    | {{f.fats}} g
+                td
+                  small
+                    | {{f.carbs}} g
+                td
+                  small
+                    | {{f.protein}} g
+      br
+      div
+        a.btn.btn.btn-primary(ng-click="openAddFoodModal()")
+          | Add A Food

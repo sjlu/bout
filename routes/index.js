@@ -24,7 +24,8 @@ _.each([
   'devices',
   'friends',
   'leaderboard',
-  'foods'
+  'foods',
+  'steps'
 ], function(route) {
   router.get('/' + route + '*', middlewares.redirectIfNoLogin, function(req, res, next) {
     return res.render('client');

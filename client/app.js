@@ -4,10 +4,11 @@ bout.config(['$routeProvider', '$locationProvider', function($routeProvider, $lo
 
   var routes = {
     '/overview': 'overview',
+    '/steps': 'steps',
+    '/steps/leaderboard': 'stepsLeaderboard',
     '/account': 'account',
     '/devices': 'devices',
     '/friends': 'friends',
-    '/leaderboard': 'leaderboard',
     '/foods': 'listFoods'
   };
 
