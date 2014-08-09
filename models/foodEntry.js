@@ -1,6 +1,7 @@
 var mongoose = require('../lib/mongoose');
 var _ = require('lodash');
 var convert = require('convert-units');
+var moment = require('moment');
 
 var FoodEntry = new mongoose.Schema({
   _uid: {
@@ -13,8 +14,12 @@ var FoodEntry = new mongoose.Schema({
     required: true,
     ref: 'Food'
   },
-  eaten_at: {
-    type: Date,
+  eaten_at_date: {
+    type: Number,
+    index: true
+  },
+  eaten_at_time: {
+    type: Number,
     index: true
   },
   serving_size: {
@@ -28,9 +33,26 @@ var FoodEntry = new mongoose.Schema({
 });
 
 FoodEntry.pre('save', function(next) {
-  if (!this.eaten_at) {
-    this.eaten_at = new Date();
+  if (!this.eaten_at_date && !this.eaten_at_time) {
+    var rightNow = moment();
+    this.eaten_at_date = rightNow.format('YYYYMMDD');
+    this.eaten_at_time = rightNow.format('HHmm');
   }
+
+  if (!this.eaten_at_date || !this.eaten_at_time) {
+    return next(new Error("`eaten_at_date` and `eaten_at_time` must be provided together"));
+  }
+
+  // round to the nearest 15 minute mark
+  if (this.isModified('eaten_at_time')) {
+    var time = moment(this.eaten_at_time, 'HHmm');
+
+    var remainder = time.minute() % 15;
+    time.subtract('minutes', remainder).add('minutes', remainder > 7 ? 15 : 0);
+
+    this.eaten_at_time = time.format('HHmm');
+  }
+
   next();
 });
 
@@ -68,7 +90,8 @@ FoodEntry.statics.createEntryForUser = function(user, fields, cb) {
   // only these fields can go through
   fields = _.pick(fields, [
     "_fid",
-    "eaten_at",
+    "eaten_at_date",
+    "eaten_at_time",
     "serving_size",
     "serving_type"
   ]);
