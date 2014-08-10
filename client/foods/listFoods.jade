@@ -48,8 +48,9 @@ div.section-body
                   small
                     | {{f.protein}} g
                 td
-                  i.fa.fa-plus(ng-click="openAddEntryModal(f)")
+                  span.btn.btn-link(tooltip="Add this item to your food log")
+                    i.fa.fa-plus(ng-click="openAddEntryModal(f)")
       br
       div
-        a.btn.btn.btn-primary(ng-click="openAddFoodModal()")
+        a.btn.btn-primary(ng-click="openAddFoodModal()")
           | Add A Food
