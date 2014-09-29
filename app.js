@@ -38,9 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(middlewares.getUserFromAuth);
 app.locals.asset = function(uri) {
-  if (config.ENV === 'production') {
-    return urljoin(config.AWS_CF_URL, config.GITREV, uri);
-  }
+  // if (config.ENV === 'production') {
+  //   return urljoin(config.AWS_CF_URL, config.GITREV, uri);
+  // }
   return uri;
 }
 
