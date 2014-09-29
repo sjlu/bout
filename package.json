@@ -5,7 +5,7 @@
   "scripts": {
     "start": "naught start --ipc-file naught-web.ipc --log naught-web.log --stdout stdout-web.log --stderr stderr-web.log bin/web",
     "start-worker": "naught start --ipc-file naught-worker.ipc --log naught-worker.log --stdout stdout-worker.log --stderr stderr-worker.log bin/worker",
-    "dev": "export ENV=development; node-dev ./bin/www",
+    "dev": "export ENV=development; node-dev ./bin/web",
     "dev-worker": "node-dev ./bin/worker",
     "deploy": "naught deploy naught-web.ipc; naught deploy naught-worker.ipc"
   },
