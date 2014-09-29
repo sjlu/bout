@@ -7,7 +7,8 @@
     "start-worker": "naught start --ipc-file naught-worker.ipc --log naught-worker.log --stdout stdout-worker.log --stderr stderr-worker.log bin/worker",
     "dev": "export ENV=development; node-dev ./bin/web",
     "dev-worker": "node-dev ./bin/worker",
-    "deploy": "naught deploy naught-web.ipc; naught deploy naught-worker.ipc"
+    "deploy": "grunt deploy; naught deploy naught-web.ipc; naught deploy naught-worker.ipc",
+    "postinstall": "bower install"
   },
   "engines": {
     "node": "0.10.29"
