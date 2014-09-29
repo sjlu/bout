@@ -10,7 +10,6 @@ var server = app.listen(app.get('port'), function() {
 
 process.on('message', function(message) {
  if (message === 'shutdown') {
-   performCleanup();
    process.exit(0);
  }
 });
