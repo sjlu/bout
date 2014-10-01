@@ -34,7 +34,7 @@ router.post('/token', function(req, res, next) {
   auth.authenticate(username, req.body.password, function(err, uid) {
     if (err) return next(err);
     if (!uid) {
-      res.json({
+      res.json(400, {
         "error": "Unknown username and password combination."
       });
     }
