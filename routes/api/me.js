@@ -88,8 +88,26 @@ router.get('/track', function(req, res, next) {
 
 });
 
+router.get('/food/summary', function(req, res, next) {
+  models.FoodEntry.getEntriesForUser(req.user, req.query, function(err, entries) {
+    if (err) return next(err);
+    var summary = {
+      calories: 0,
+      fats: 0,
+      carbs: 0,
+      protien: 0,
+    };
+    _.each(entries, function(entry) {
+      _.each(_.keys(summary), function(k) {
+        summary[k] += entry.nutrition[k];
+      });
+    });
+    res.json(summary);
+  });
+});
+
 router.get('/food/entries', function(req, res, next) {
-  models.FoodEntry.getEntriesForUser(req.user, function(err, entries) {
+  models.FoodEntry.getEntriesForUser(req.user, req.query, function(err, entries) {
     if (err) return next(err);
     res.json(entries);
   });

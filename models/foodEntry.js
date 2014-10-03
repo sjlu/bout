@@ -80,10 +80,16 @@ FoodEntry.virtual('nutrition').get(function() {
   return nutrition;
 });
 
-FoodEntry.statics.getEntriesForUser = function(user, cb) {
-  this.find({
-    _uid: user.id
-  }).populate('_fid').exec(cb);
+FoodEntry.statics.getEntriesForUser = function(user, opts, cb) {
+  var where = {
+    _uid: user.id,
+  };
+
+  if (opts.date) {
+    where.eaten_at_date = opts.date;
+  }
+
+  this.find(where).populate('_fid').exec(cb);
 }
 
 FoodEntry.statics.createEntryForUser = function(user, fields, cb) {
