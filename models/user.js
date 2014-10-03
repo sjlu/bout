@@ -64,6 +64,9 @@ var User = new mongoose.Schema({
   },
   fitbit_secret: {
     type: String
+  },
+  calorie_target: {
+    type: Number
   }
 });
 
@@ -99,7 +102,8 @@ User.methods.updateInfo = function(fields, cb) {
 
   var updatableFields = [
     "first_name",
-    "last_name"
+    "last_name",
+    "calorie_target"
   ];
 
   fields = _.pick(fields, updatableFields);

@@ -95,13 +95,16 @@ router.get('/food/summary', function(req, res, next) {
       calories: 0,
       fats: 0,
       carbs: 0,
-      protien: 0,
+      protein: 0,
     };
     _.each(entries, function(entry) {
       _.each(_.keys(summary), function(k) {
         summary[k] += entry.nutrition[k];
       });
     });
+    if (req.user.calorie_target) {
+      summary.calories_remaining = req.user.calorie_target - summary.calories;
+    }
     res.json(summary);
   });
 });
