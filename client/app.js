@@ -3,25 +3,20 @@ bout.config(['$routeProvider', '$locationProvider', function($routeProvider, $lo
   $locationProvider.html5Mode(true);
 
   var routes = {
-    '/overview': 'overview',
-    '/steps': 'steps',
-    '/steps/leaderboard': 'stepsLeaderboard',
+    '/': 'overview',
     '/account': 'account',
-    '/devices': 'devices',
-    '/friends': 'friends',
-    '/foods': 'listFoods'
   };
 
   for (var route in routes) {
     var controller = routes[route];
-    $routeProvider.when(route, {
+    $routeProvider.when('/app' + route, {
       templateUrl: controller + '.tmpl',
       controller: controller
     });
   }
 
   $routeProvider.otherwise({
-    redirectTo: '/overview'
+    redirectTo: '/app'
   });
 
 }]);

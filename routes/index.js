@@ -8,7 +8,7 @@ var _ = require('lodash');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.user) {
-    return res.redirect('/overview');
+    return res.redirect('/app');
   }
 
   return res.render('index');
@@ -19,13 +19,7 @@ var renderClient = function(req, res, next) {
 }
 
 _.each([
-  'overview',
-  'account',
-  'devices',
-  'friends',
-  'leaderboard',
-  'foods',
-  'steps'
+  'app'
 ], function(route) {
   router.get('/' + route + '*', middlewares.redirectIfNoLogin, function(req, res, next) {
     return res.render('client');
