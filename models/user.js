@@ -66,7 +66,8 @@ var User = new mongoose.Schema({
     type: String
   },
   calorie_target: {
-    type: Number
+    type: Number,
+    default: 0
   }
 });
 
