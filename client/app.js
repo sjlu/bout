@@ -5,6 +5,8 @@ bout.config(['$routeProvider', '$locationProvider', function($routeProvider, $lo
   var routes = {
     '/': 'overview',
     '/account': 'account',
+    '/manifesto/': 'manifesto',
+    '/manifesto/intro': 'manifesto_intro'
   };
 
   for (var route in routes) {
