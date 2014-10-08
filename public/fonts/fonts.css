@@ -15,3 +15,15 @@
   font-weight: 700;
   src: url("Lato-Bold.ttf");
 }
+
+@font-face {
+  font-family: "Merriweather";
+  font-weight: 300;
+  src: url("Merriweather-Light.ttf");
+}
+
+@font-face {
+  font-family: "Merriweather";
+  font-weight: 500;
+  src: url("Merriweather-Regular.ttf");
+}
